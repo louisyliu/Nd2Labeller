@@ -3,40 +3,40 @@ function post_info =  ND2Analysis(filename, obj, varargin)
 switch nargin
     case 2
         output_every_frame = 1;
+        slice = [];
         split_channel_num = 1;
         output_channel = 1;
         shortest_side = 720;
-        slice = [];
     case 3
         output_every_frame =  varargin{1};
+        slice = [];
         split_channel_num = 1;
         output_channel = 1;
         shortest_side = 720;
-        slice = [];
     case 4
         output_every_frame =  varargin{1};
-        split_channel_num = varargin{2};
+        slice = varargin{2};
+        split_channel_num = 1;
         output_channel = 1;
         shortest_side = 720;
-        slice = [];
     case 5
         output_every_frame =  varargin{1};
-        split_channel_num = varargin{2};
-        output_channel = varargin{3};
+        slice = varargin{2};
+        split_channel_num = varargin{3};
+        output_channel = 1;
         shortest_side = 720;
-        slice = [];
     case 6
         output_every_frame =  varargin{1};
-        split_channel_num = varargin{2};
-        output_channel = varargin{3};
-        shortest_side =  varargin{4};
-        slice = [];
-    case 7 
+        slice = varargin{2};
+        split_channel_num = varargin{3};
+        output_channel = varargin{4};
+        shortest_side = 720;
+    case 7
         output_every_frame =  varargin{1};
-        split_channel_num = varargin{2};
-        output_channel = varargin{3};
-        shortest_side =  varargin{4};
-        slice = varargin{5};
+        slice = varargin{2};
+        split_channel_num = varargin{3};
+        output_channel = varargin{4};
+        shortest_side = varargin{5};
     otherwise
         error('Error: Number of argument is out of range. ')
 end
@@ -44,11 +44,6 @@ end
 interval = output_every_frame * split_channel_num;
 imgInfo = ND2Info(filename);
 img_num = imgInfo.numImages; % number of frames of movie
-<<<<<<< HEAD
-period_s = imgInfo.Experiment.parameters.periodDiff.avg/1000;
-real_fps = round(1/imgInfo.Experiment.parameters.periodMs*1000); % real fps
-output_fps = real_fps / interval; % output fps
-=======
 
 if imgInfo.Experiment.parameters.durationMs == 0 % fast time lapse
     period_original = imgInfo.Experiment.parameters.periodDiff.avg/1000; % unit s
@@ -60,7 +55,6 @@ end
 
 output_fps = fps_original / interval; % output fps
 period_final = period_original * interval;
->>>>>>> 77b5fc4afcfb79b14ce1022eca864a1f97c97e8e
 temp = ND2ReadSingle(filename, 1);
 min_size = min(size(temp));
 
@@ -75,8 +69,13 @@ temp = imresize(temp, scale);
 exported_frame = cell(numel(output_channel), 1);
 compare_sample = cell(numel(output_channel), 1);
 for i = 1:numel(output_channel)
-    exported_frame{i} = output_channel(i):interval:img_num;
-    compare_sample{i} = ND2ReadSingle(filename, output_channel(i));
+    if isempty(slice)
+        exported_frame{i} = output_channel(i):interval:img_num;
+        compare_sample{i} = ND2ReadSingle(filename, output_channel(i));
+    else
+        exported_frame{i} = slice(1):interval: slice(2);
+        compare_sample{i} = ND2ReadSingle(filename, slice(1));
+    end
 end
 
 minframe = min(cellfun(@numel, exported_frame));
