@@ -33,7 +33,8 @@ end
 interval = output_every_frame * split_channel_num;
 imgInfo = ND2Info(filename);
 img_num = imgInfo.numImages; % number of frames of movie
-real_fps = round(1/imgInfo.Experiment.parameters.periodDiff.avg*1000); % real fps
+period_s = imgInfo.Experiment.parameters.periodDiff.avg/1000;
+real_fps = round(1/imgInfo.Experiment.parameters.periodMs*1000); % real fps
 output_fps = real_fps / interval; % output fps
 temp = ND2ReadSingle(filename, 1);
 min_size = min(size(temp));
