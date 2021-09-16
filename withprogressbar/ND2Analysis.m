@@ -45,13 +45,13 @@ interval = output_every_frame * split_channel_num;
 imgInfo = ND2Info(filename);
 img_num = imgInfo.numImages; % number of frames of movie
 
-if imgInfo.Experiment.parameters.durationMs == 0 % fast time lapse
-    period_original = imgInfo.Experiment.parameters.periodDiff.avg/1000; % unit s
-    fps_original = round(1/period_original);
-else % ND acquisition
-    period_original = imgInfo.Experiment.parameters.periodMs/1000;
+% if imgInfo.Experiment.parameters.durationMs == 0 % fast time lapse
+%     period_original = imgInfo.Experiment.parameters.periodDiff.avg/1000; % unit s
+%     fps_original = round(1/period_original);
+% else % ND acquisition
+    period_original = imgInfo.Experiment.parameters.periods.periodMs/1000;
     fps_original = 1/period_original;
-end
+% end
 
 output_fps = fps_original / interval; % output fps
 period_final = period_original * interval;

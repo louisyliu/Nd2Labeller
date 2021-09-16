@@ -1,4 +1,5 @@
 function img_cat = catimg(img, post_info)
+            
 %CATIMG concatenates the image stacks horizontally by default.
 
 disp('---------------Concatenating the image sequence.----------------');
@@ -12,8 +13,7 @@ end
 img_cat = [];
 if channel_num > 1 && channel_num <= 4
     if channel_num == 2 || channel_num == 3
-        for i_stack = 1:channel_num
-            img_cat = [img_cat img(:,:,:, i_stack)];
+        for i_stack = 1:channel_numimg_cat = [img_cat img(:,:,:, i_stack)];
         end
     else
         img_cat = [img(:,:,:, 1) img(:,:,:, 2); img(:,:,:, 3) img(:,:,:, 4)];

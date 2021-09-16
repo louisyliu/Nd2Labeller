@@ -1,12 +1,16 @@
+filedir = 'G:\project\20210913_yw320_yw510_pdmswell_37C\';
+file = '326_patternformaiton';
+savedir = 'G:\project_processed\20210913_yw320_yw510_pdmswell_37C\';
 
-filedir = 'G:\project\20210815_lattice_inG5\';
-file = 'G5inlargerpetridish_6min';
-savedir = 'G:\project_processed\';
+if ~exist(savedir, 'dir')
+    mkdir(savedir)
+end
+
 
 filename = [filedir file '.nd2'];
 
 %Analize ND2 file
-post_info =  ND2Analysis(filename, 4, 4, 2, [1 2]);
+post_info =  ND2Analysis(filename, 4, 1, [1 300]);
 %Split and compress the images
 img_compressed = ND2Compressor_new(filename, post_info);
 %Concatenate image stack
