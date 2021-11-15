@@ -2,7 +2,7 @@ function img2avi(img, savename, framerate, isCompressed)
 
 if isCompressed
     v = VideoWriter(savename, 'MPEG-4');
-    v.Quality = 75;
+    v.Quality = 100;
 else
     v = VideoWriter(savename, 'Grayscale AVI');
 end

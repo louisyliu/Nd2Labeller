@@ -36,6 +36,7 @@ else
     type = {Dimensions.type};
     count = [Dimensions.count];
     posFramesNo = contains(type, 'XY') | contains(type, 'Z');
+    exportInterval = exportEveryNumFrame * nFreqDiv * prod(count(posFramesNo));
     % one channel (frequency division)
     if nFreqDiv > 1
         if isempty(exportedFreqNo)
@@ -64,6 +65,11 @@ else
         [~, i_sort] = sort(intensity, 'descend');
         exportedFrame = exportedFrame(i_sort, :);
     else    % multichannel
+        
+        if isempty(slice)
+            slice = [1 nImg];
+        end
+        
         if any(contains(type, 'XY'))
             if isempty(exportedXYNo)
                 exportedXYNo = 1:count(contains(type, 'XY'));
@@ -83,7 +89,7 @@ else
         exportedFrame = cell(numel(exportedXYNo), numel(exportedZNo));
         for iXY = 1:numel(exportedXYNo)
             for iZ = 1:numel(exportedZNo)
-                exportedFrame{iXY, iZ} = coordconvert(Dimensions, 'XY', exportedXYNo(iXY), 'Z', exportedZNo(iZ));
+                exportedFrame{iXY, iZ} = coordconvert(Dimensions, 'XY', exportedXYNo(iXY), 'Z', exportedZNo(iZ), 'T', slice(1):exportInterval:slice(2));
                 exportedFrame{iXY, iZ}(exportedFrame{iXY, iZ} > nImg) = [];
             end
         end

@@ -51,7 +51,7 @@ for iZ = 1:nZStacks
                     imgCompressed(:,:,icurrent, iChannel, iXY, iZ) = im2uint8(img(:,:,iChannel));
                 end
             end
-            if processedFrame ~= 1
+            if numel(processedFrame) ~= 1
                 dispbar(icurrent, nProcessedFrame);
             end
         end

@@ -3,8 +3,8 @@ function avi2mp4(filename)
 in = VideoReader(filename);
 savename = fullfile(filepath, name);
 out = VideoWriter(savename,'MPEG-4');
-out.Quality = 75;
-out.FrameRate = 40;
+out.Quality = 100;
+out.FrameRate = 30;
 open(out)
 while hasFrame(in)
     frame = readFrame(in);

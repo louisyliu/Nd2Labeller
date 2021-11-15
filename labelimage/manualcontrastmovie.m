@@ -20,9 +20,9 @@ f = Nd2Reader(filename);
 for iXY = 1:size(frames, 1)
     for iZ = 1:size(frames, 2)
         frameStack = frames{iXY, iZ};
-        im1 = f.getimage(frameStack(1));
-        im2 = f.getimage(frameStack(round(end/2)));
-        im3 = f.getimage(frameStack(end));
+        im1 = im2double(f.getimage(frameStack(1)));
+        im2 = im2double(f.getimage(frameStack(round(end/2))));
+        im3 = im2double(f.getimage(frameStack(end)));
         
         currentChannel = 1;
         channelContrast = zeros(numel(exportedChannelNo), 2);

@@ -1,11 +1,10 @@
-clear
-parameters
+% parameters
 disp('--------------Loading Nd2 Data------------------')
 postInfo =  nd2analysis(filename, objective, nFreqDiv, exportPara);
 disp('-----------------Finish Loading-----------------')
 % Compress and contrast.
 if processPara.isManualContrast
-    postInfo.manualContrastPara = manualcontrastmovie(filename, exportedFrame, exportedChannelNo);
+    postInfo.manualContrastPara = manualcontrastmovie(filename, postInfo.frames, postInfo.exportedChannelNo);
 end
     
 imgCompressed = imgcompress(filename, postInfo, processPara.isAutoContrast, processPara.isManualContrast);
@@ -34,8 +33,8 @@ else
     imgTime = imgText;
 end
 %Convert img to .avi
-savename = [savedir postInfo.name(1:end-4) '_scalebar' num2str(barInfo.scalebarUm) 'um'];
-if strcmp(postInfo.duration, 'N/A')
+savename = [savedir '\' postInfo.name(1:end-4) '_scalebar' num2str(barInfo.scalebarUm) 'um'];
+if strcmp(postInfo.duration, 'N/A') || size(imgTime, 3) == 1
     imwrite(imgTime, [savename '.png']);
     disp('----------Successfully save the video in ------------');
     disp(['----' savename '.png----']);
