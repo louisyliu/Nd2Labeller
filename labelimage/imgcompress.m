@@ -1,4 +1,6 @@
-function imgCompressed = imgcompress(filename, postInfo, isAutoContrast, isManualContrast)
+function imgCompressed = imgcompress(filename, postInfo, contrastMethod)
+% Contrast method : 
+% 0: no contrast; 1: auto contrast; 2: manual contrast
 
 scale = postInfo.resizeScale;
 imgSize = postInfo.compressedSize;
@@ -33,13 +35,13 @@ for iZ = 1:nZStacks
             img = imresize(img, scale); % Resize the image
             % Contrast stretch image
             currentChannel = 0;
-            if isAutoContrast
+            if contrastMethod == 1
                 lowhigh = postInfo.autoContrastPara;
                 for iChannel = exportedChannelNo
                     currentChannel = currentChannel + 1;
                     imgCompressed(:,:,icurrent, iChannel, iXY, iZ) = im2uint8(imadjust(img(:,:,iChannel), lowhigh{iXY, iZ}(currentChannel,:)));
                 end
-            elseif isManualContrast
+            elseif contrastMethod == 2
                 lowhigh = postInfo.manualContrastPara;
                 for iChannel = exportedChannelNo
                     currentChannel = currentChannel + 1;

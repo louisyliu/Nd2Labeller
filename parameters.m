@@ -2,7 +2,7 @@
 
 %% File:
 % filename, savedir
-filename = 'G:\project\20211104_YW531_06PYVS_singlecell_response_light\531_06PYVS_20x_red2fish_filamentresponse_light.nd2';
+filename = 'G:\project\20211209_410_drolet_PDMS\20x_410_50umPDMS_gd55_OD12.nd2';
 % savedir = 'E:\exp_script\GitProject\sample\';
 [filedir, file, ~] = fileparts(filename);
 savedir = strrep(filedir, 'project', 'project_processed');
@@ -31,8 +31,7 @@ exportPara.exportedXYNo = [];
 exportPara.exportedZNo = [];
 exportPara.shortestSideLength = 720;
 
-processPara.isAutoContrast = 0;
-processPara.isManualContrast = 1;
+processPara.contrastMethod = 2; % 0: no contrast; 1: auto contrast; 2: manual contrast
 processPara.isImgCombined = 1;
 processPara.hasScalebar = 1;
 processPara.hasScaleText =1;
@@ -42,7 +41,7 @@ processPara.hasTimeStamp = 1;
 % isCompressed, frameRate.
 
 isCompressed = 1; % 1 for 'MPEG-4' and 0 for 'Grayscale AVI'
-frameRate = 20;
+frameRate = 30;
 
 %% EXE
-demo;
+demolabelimg;

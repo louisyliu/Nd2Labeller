@@ -4,7 +4,7 @@ in = VideoReader(filename);
 savename = fullfile(filepath, name);
 out = VideoWriter(savename,'MPEG-4');
 out.Quality = 100;
-out.FrameRate = 30;
+out.FrameRate = 20;
 open(out)
 while hasFrame(in)
     frame = readFrame(in);

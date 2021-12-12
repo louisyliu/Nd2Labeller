@@ -3,7 +3,7 @@ function imgTime = stamptime(img, postInfo)
 [imgHeight, imgWidth, nImg] = size(img);
 if nImg == 1
     imgTime = img;
-    return 
+    return
 end
 % fps = postInfo.final_fps;
 % post_info_f = postInfo;
@@ -27,12 +27,13 @@ singleNo = floor(log10(duration))+1;
 
 for iImg = 1:nImg
     
+    
     timeStamp = timeSeq(iImg);
     
     % Evaluate time format
     if duration < 300 && period < 1
         % if period is shorter than 5 min.  format x.xx s.
-        textStr = sprintf(['%' num2str(decimalNo + singleNo + 1) '.' num2str(decimalNo) 'f s'],  (iImg-1) * period);
+        textStr = sprintf(['%' num2str(decimalNo + singleNo + 1) '.' num2str(decimalNo) 'f s'],  timeStamp);
     elseif duration < 3600
         % if period is shorter than 1 h.  format xx:xx (m:s).
         sec = floor(mod(timeStamp,60));
@@ -56,6 +57,7 @@ for iImg = 1:nImg
     RGB = insertText(imgTime(:,:,iImg),position,textStr,'Font','Lucida Console' ,'FontSize',26,'BoxOpacity', 0, 'TextColor','white');
     
     imgTime(:,:,iImg) = RGB(:,:,1);
+    
     dispbar(iImg, nImg);
 end
 
