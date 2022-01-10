@@ -26,7 +26,7 @@ for iZ = 1:nZStacks
     for iXY = 1:nXYStacks
         icurrent = 0;
         stackNo = stackNo + 1;
-        disp(['-------------Img Stack {' num2str(stackNo) '} is being compressed.------------']);
+        disptitle(['Compressing Img Stack {' num2str(stackNo) '}.']);
         processedFrame = frames{iXY, iZ};
         nProcessedFrame = numel(processedFrame);
         for iImg = processedFrame

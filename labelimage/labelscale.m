@@ -1,6 +1,6 @@
 function [imgScalebar, barInfo] = labelscale(img, postInfo)
 
-disp('-----------------Labeling the scale bar-------------------');
+disptitle('Labeling the scale bar');
 scale = postInfo.scale;
 [imgHeight, imgWidth] = deal(postInfo.compressedSize(1), postInfo.compressedSize(2));
 
@@ -14,9 +14,15 @@ realBarWidth = round(realBarWidth, -floor(log10(realBarWidth)));
 barWidth = round(realBarWidth / scale);
 
 %Insert the scale bar.
+bgcolor = mean(img(end-bot-barHeight:end-bot, end-right-barWidth:end-right, 1,:));
+if bgcolor > 200
+    barcolor = 0;
+else
+    barcolor = 255;
+end
 imgScalebar = img;
-imgScalebar(end-bot-barHeight:end-bot, end-right-barWidth:end-right, :,:) = 255;
+imgScalebar(end-bot-barHeight:end-bot, end-right-barWidth:end-right, :,:) = barcolor;
 
-[barInfo.barHeight, barInfo.barWidth, barInfo.right, barInfo.bot, barInfo.scalebarUm] = deal(...
-    barHeight, barWidth, right, bot, realBarWidth);
+[barInfo.barHeight, barInfo.barWidth, barInfo.right, barInfo.bot, barInfo.scalebarUm, barInfo.barcolor] = deal(...
+    barHeight, barWidth, right, bot, realBarWidth, barcolor);
 end

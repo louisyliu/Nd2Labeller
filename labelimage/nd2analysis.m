@@ -89,7 +89,14 @@ else
         exportedFrame = cell(numel(exportedXYNo), numel(exportedZNo));
         for iXY = 1:numel(exportedXYNo)
             for iZ = 1:numel(exportedZNo)
-                exportedFrame{iXY, iZ} = coordconvert(Dimensions, 'XY', exportedXYNo(iXY), 'Z', exportedZNo(iZ), 'T', slice(1):exportInterval:slice(2));
+%                 if verLessThan('matlab','9.7')
+                    % -- Code to run in MATLAB R2019b and earlier here --
+                    exportedFrame{iXY, iZ} = coordconvert2019(Dimensions, exportedXYNo(iXY), exportedZNo(iZ), slice(1):exportInterval:slice(2));
+%                 else
+                    % -- Code to run in MATLAB R2019b and later here --
+%                     exportedFrame{iXY, iZ} = coordconvert(Dimensions, 'XY', exportedXYNo(iXY), 'Z', exportedZNo(iZ), 'T', slice(1):exportInterval:slice(2));
+%                 end
+                
                 exportedFrame{iXY, iZ}(exportedFrame{iXY, iZ} > nImg) = [];
             end
         end

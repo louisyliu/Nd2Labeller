@@ -2,7 +2,7 @@
 
 %% File:
 % filename, savedir
-filename = 'G:\project\20211209_410_drolet_PDMS\20x_410_50umPDMS_gd55_OD12.nd2';
+filename = 'G:\project\20220109_410_nonmotile_motileregion\10x_7h_410_culture_glassslide_forbiddenzone.nd2';
 % savedir = 'E:\exp_script\GitProject\sample\';
 [filedir, file, ~] = fileparts(filename);
 savedir = strrep(filedir, 'project', 'project_processed');
@@ -20,8 +20,8 @@ nFreqDiv = 1;
 % slice, exportedFreqChannelNo, shortestSideLength, isImgCombined,
 % hasScalebar, hasScaleText, hasTimeStamp.
 
-exportPara.slice = [];
-exportPara.exportEveryNumFrame = 2;
+exportPara.slice = [1 201];
+exportPara.exportEveryNumFrame = 1;
 
 % At most two dimensions can be selected. For example, if channelNo and
 % XYNo contains multiple elements, ZNo must be a scalar.
@@ -31,7 +31,7 @@ exportPara.exportedXYNo = [];
 exportPara.exportedZNo = [];
 exportPara.shortestSideLength = 720;
 
-processPara.contrastMethod = 2; % 0: no contrast; 1: auto contrast; 2: manual contrast
+processPara.contrastMethod = 1; % 0: no contrast; 1: auto contrast; 2: manual contrast
 processPara.isImgCombined = 1;
 processPara.hasScalebar = 1;
 processPara.hasScaleText =1;
@@ -41,7 +41,7 @@ processPara.hasTimeStamp = 1;
 % isCompressed, frameRate.
 
 isCompressed = 1; % 1 for 'MPEG-4' and 0 for 'Grayscale AVI'
-frameRate = 30;
+frameRate = 20;
 
 %% EXE
 demolabelimg;

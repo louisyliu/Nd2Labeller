@@ -2,7 +2,7 @@ function lowhigh = autocontrastmovie(filename, varargin)
 
 ImgInfo = nd2info(filename);
 if nargin == 1
-    frames = 1:ImgInfo.nImg;
+    frames = {1:ImgInfo.nImg};
     exportedChannelNo = 1;
 elseif nargin == 2
     frames = varargin{1};

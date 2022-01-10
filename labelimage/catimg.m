@@ -2,7 +2,7 @@ function imgCat = catimg(img, postInfo)
 
 %CATIMG concatenates the image stacks horizontally by default.
 
-disp('---------------Concatenating the image sequence.----------------');
+disptitle('Concatenating the image sequence.');
 
 if postInfo.nTime == 1
     dimHorizontal = 3;
@@ -56,5 +56,4 @@ else
     end
 end
 
-disp('---------------Finish concatenation.----------------');
 end

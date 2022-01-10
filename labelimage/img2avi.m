@@ -11,13 +11,13 @@ v.FrameRate = framerate;
 
 open(v);
 nImg = size(img, 3);
-disp('-----------------Converting IMG to AVI---------------------')
+disptitle('Converting IMG to AVI')
 for iImg = 1:nImg
     writeVideo(v, img(:,:,iImg));
-    dispbar(iImg, nImg);
+%     dispbar(iImg, nImg);
 end
 
-disp('----------Successfully save the video in ------------')
-disp(['----' savename '.' v.FileFormat '----'])
+disptitle('Successfully save the video in ')
+disptitle([savename '.' v.FileFormat])
 close(v);
 end

@@ -10,6 +10,12 @@ end
 imgTime = img;
 
 position = [round(0.007*imgWidth) round(0.007*imgHeight)];
+bgcolor = img(1,1,1);
+if bgcolor > 200
+    textcolor = 'black';
+else
+    textcolor = 'white';
+end
 duration = postInfo.duration;
 period = postInfo.period; % s
 timeSeq = postInfo.timeSeq{1};
@@ -24,9 +30,7 @@ else
 end
 singleNo = floor(log10(duration))+1;
 
-
 for iImg = 1:nImg
-    
     
     timeStamp = timeSeq(iImg);
     
@@ -54,11 +58,11 @@ for iImg = 1:nImg
         end
     end
     
-    RGB = insertText(imgTime(:,:,iImg),position,textStr,'Font','Lucida Console' ,'FontSize',26,'BoxOpacity', 0, 'TextColor','white');
+    RGB = insertText(imgTime(:,:,iImg),position,textStr,'Font','Lucida Console' ,'FontSize',26,'BoxOpacity', 0, 'TextColor',textcolor);
     
     imgTime(:,:,iImg) = RGB(:,:,1);
     
-    dispbar(iImg, nImg);
+%     dispbar(iImg, nImg);
 end
 
 end
