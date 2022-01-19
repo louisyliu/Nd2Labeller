@@ -8,6 +8,7 @@ if processPara.contrastMethod == 2
 end
     
 imgCompressed = imgcompress(filename, postInfo, processPara.contrastMethod);
+nImg = size(imgCompressed, 3);
 % Concatenate image stack
 if processPara.isImgCombined
     imgCat = catimg(imgCompressed, postInfo);
@@ -21,13 +22,13 @@ else
     imgScalebar = imgCat;
 end
 % Label text of scalebar
-if processPara.hasScaleText
+if processPara.hasScaleText && nImg > 1
     imgText = labeltext(imgScalebar, barInfo);
 else
     imgText = imgScalebar;
 end
 % Stamp time
-if processPara.hasTimeStamp
+if processPara.hasTimeStamp && nImg > 1
     disptitle('Stamping time')
     imgTime = stamptime(imgText, postInfo);
 else
