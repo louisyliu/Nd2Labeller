@@ -2,7 +2,7 @@
 
 %% File:
 % filename, savedir
-filename = 'G:\project\20220109_410_nonmotile_motileregion\10x_7h_410_culture_glassslide_forbiddenzone.nd2';
+filename = 'G:\project\20210913_yw320_yw510_pdmswell_37C\4x_377_pdmswell_edge.nd2';
 % savedir = 'E:\exp_script\GitProject\sample\';
 [filedir, file, ~] = fileparts(filename);
 savedir = strrep(filedir, 'project', 'project_processed');
@@ -20,8 +20,8 @@ nFreqDiv = 1;
 % slice, exportedFreqChannelNo, shortestSideLength, isImgCombined,
 % hasScalebar, hasScaleText, hasTimeStamp.
 
-exportPara.slice = [1 201];
-exportPara.exportEveryNumFrame = 1;
+exportPara.slice = [];
+exportPara.exportEveryNumFrame = 2;
 
 % At most two dimensions can be selected. For example, if channelNo and
 % XYNo contains multiple elements, ZNo must be a scalar.
@@ -31,7 +31,7 @@ exportPara.exportedXYNo = [];
 exportPara.exportedZNo = [];
 exportPara.shortestSideLength = 720;
 
-processPara.contrastMethod = 1; % 0: no contrast; 1: auto contrast; 2: manual contrast
+processPara.contrastMethod = 2; % 0: no contrast; 1: auto contrast; 2: manual contrast
 processPara.isImgCombined = 1;
 processPara.hasScalebar = 1;
 processPara.hasScaleText =1;
