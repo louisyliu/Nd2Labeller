@@ -1,6 +1,6 @@
 function [imgScalebar, barInfo] = labelscale(img, postInfo)
 
-disptitle('Labeling the scale bar');
+% disptitle('Labeling the scale bar');
 scale = postInfo.scale;
 [imgHeight, imgWidth] = deal(postInfo.compressedSize(1), postInfo.compressedSize(2));
 

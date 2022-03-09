@@ -1,8 +1,9 @@
 function lowhigh = manualcontrastmovie(filename, varargin)
 
-ImgInfo = nd2info(filename);
+f = Nd2Reader(filename);
+nImg = f.getnimg;
 if nargin == 1
-    frames = {1:ImgInfo.nImg};
+    frames = {1:nImg};
     exportedChannelNo = 1;
 elseif nargin == 2
     frames = varargin{1};
@@ -15,7 +16,7 @@ end
 % Initialization
 lowhigh = cell(frames);
 
-f = Nd2Reader(filename);
+
 
 for iXY = 1:size(frames, 1)
     for iZ = 1:size(frames, 2)

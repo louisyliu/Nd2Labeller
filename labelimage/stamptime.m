@@ -1,4 +1,10 @@
-function imgTime = stamptime(img, postInfo)
+function imgTime = stamptime(img, postInfo, varargin)
+
+if nargin == 2
+    startTime = 0; % startTime: s.
+elseif nargin == 3
+    startTime = varargin{1};
+end
 
 [imgHeight, imgWidth, nImg] = size(img);
 if nImg == 1
@@ -10,7 +16,7 @@ end
 imgTime = img;
 
 position = [round(0.007*imgWidth) round(0.007*imgHeight)];
-bgcolor = img(1,1,1);
+bgcolor = mean2(img(position(1):position(1)+50, position(2):position(2)+50,1));
 if bgcolor > 200
     textcolor = 'black';
 else
@@ -30,9 +36,11 @@ else
 end
 singleNo = floor(log10(duration))+1;
 
+fontsize = round(26/720*min(size(img, [1 2])));
+
 for iImg = 1:nImg
     
-    timeStamp = timeSeq(iImg);
+    timeStamp = timeSeq(iImg)+startTime;
     
     % Evaluate time format
     if duration < 300 && period < 1
@@ -41,24 +49,24 @@ for iImg = 1:nImg
     elseif duration < 3600
         % if period is shorter than 1 h.  format xx:xx (m:s).
         sec = floor(mod(timeStamp,60));
-        min = floor(timeStamp/60);
-        textStr = sprintf('%02d:%02d (m:s)',min, sec);
+        minute = floor(timeStamp/60);
+        textStr = sprintf('%02d:%02d (m:s)',minute, sec);
     else
         % if period is longer than 1 h.  format xx:xx:xx (h:m:s) or xx:xx (h:m).
         hour = floor(timeStamp/3600);
         remainer = mod(timeStamp,3600);
-        min = floor(remainer/60);
+        minute = floor(remainer/60);
         sec = floor(mod(remainer,60));
         if mod(round(period), 3600) == 0
             textStr = sprintf('%02d h',hour);
         elseif mod(round(period), 60) == 0
-            textStr = sprintf('%02d:%02d (h:m)',hour, min);
+            textStr = sprintf('%02d:%02d (h:m)',hour, minute);
         else
-            textStr = sprintf('%02d:%02d:%02d (h:m:s)',hour, min, sec);
+            textStr = sprintf('%02d:%02d:%02d (h:m:s)',hour, minute, sec);
         end
     end
     
-    RGB = insertText(imgTime(:,:,iImg),position,textStr,'Font','Lucida Console' ,'FontSize',26,'BoxOpacity', 0, 'TextColor',textcolor);
+    RGB = insertText(imgTime(:,:,iImg),position,textStr,'Font','Lucida Console' ,'FontSize',fontsize,'BoxOpacity', 0, 'TextColor',textcolor);
     
     imgTime(:,:,iImg) = RGB(:,:,1);
     

@@ -22,7 +22,7 @@ startTime = 0; % s
 % hasScalebar, hasScaleText, hasTimeStamp.
 
 exportPara.slice = [1 540];
-exportPara.exportEveryNumFrame = 2;
+exportPara.exportEveryNumFrame = 3;
 
 % At most two dimensions can be selected. For example, if channelNo and
 % XYNo contains multiple elements, ZNo must be a scalar.

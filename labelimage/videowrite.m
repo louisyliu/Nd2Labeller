@@ -1,4 +1,4 @@
-function img2avi(img, savename, framerate, isCompressed)
+function videowrite(img, savename, framerate, isCompressed)
 
 if isCompressed
     v = VideoWriter(savename, 'MPEG-4');
@@ -10,11 +10,16 @@ end
 v.FrameRate = framerate;
 
 open(v);
-nImg = size(img, 3);
+imgDim = ndims(img);
+nImg = size(img, imgDim);
 disptitle('Converting IMG to AVI')
 for iImg = 1:nImg
-    writeVideo(v, img(:,:,iImg));
-%     dispbar(iImg, nImg);
+    if imgDim == 3
+        writeVideo(v, img(:,:,iImg));
+    elseif imgDim == 4
+        writeVideo(v, img(:,:,:,iImg));
+    end
+    %     dispbar(iImg, nImg);
 end
 
 disptitle('Successfully save the video in ')
