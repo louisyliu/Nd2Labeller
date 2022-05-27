@@ -1,8 +1,8 @@
 function postInfo =  nd2analysis(filename, objective, nFreqDiv, exportPara)
 
 % Main
-[slice, exportEveryNumFrame, exportedFreqNo, exportedXYNo, exportedZNo, exportedChannelNo, shortestSideLength] ...
-    = deal(exportPara.slice, exportPara.exportEveryNumFrame, exportPara.exportedFreqNo, exportPara.exportedXYNo, exportPara.exportedZNo,exportPara.exportedChannelNo, exportPara.shortestSideLength);
+[exportedT, exportEveryNumFrame, exportedFreqNo, exportedXYNo, exportedZNo, exportedChannelNo, shortestSideLength] ...
+    = deal(exportPara.exportedT, exportPara.exportEveryNumFrame, exportPara.exportedFreqNo, exportPara.exportedXYNo, exportPara.exportedZNo,exportPara.exportedChannelNo, exportPara.shortestSideLength);
 
 ImgInfo = nd2info(filename);
 timeSeqRaw = nd2time(filename);
@@ -47,11 +47,11 @@ else
         exportedFrame = cell(numel(exportedFreqNo), 1);
         comparedSample = cell(numel(exportedFreqNo), 1);
         for i = 1:numel(exportedFreqNo)
-            if isempty(slice)
+            if isempty(exportedT)
                 exportedFrame{i} = exportedFreqNo(i):exportInterval:nImg;
                 comparedSample{i} = nd2read(filename, exportedFreqNo(i));
             else
-                exportedFrame{i} = ceil((slice(1)-exportedFreqNo(i))/nFreqDiv)*nFreqDiv+exportedFreqNo(i):exportInterval:slice(2);
+                exportedFrame{i} = ceil((exportedT(1)-exportedFreqNo(i))/nFreqDiv)*nFreqDiv+exportedFreqNo(i):exportInterval:exportedT(2);
                 comparedSample{i} = nd2read(filename, exportedFreqNo(1));
             end
         end
@@ -66,8 +66,8 @@ else
         exportedFrame = exportedFrame(i_sort, :);
     else    % multichannel
         
-        if isempty(slice)
-            slice = [1 nImg];
+        if isempty(exportedT)
+            exportedT = [1 nImg];
         end
         
         if any(contains(type, 'XY'))
@@ -91,10 +91,10 @@ else
             for iZ = 1:numel(exportedZNo)
 %                 if verLessThan('matlab','9.7')
                     % -- Code to run in MATLAB R2019b and earlier here --
-                    exportedFrame{iXY, iZ} = coordconvert2019(Dimensions, exportedXYNo(iXY), exportedZNo(iZ), slice(1):exportInterval:slice(2));
+%                     exportedFrame{iXY, iZ} = coordconvert2019(Dimensions, exportedXYNo(iXY), exportedZNo(iZ), slice(1):exportInterval:slice(2));
 %                 else
                     % -- Code to run in MATLAB R2019b and later here --
-%                     exportedFrame{iXY, iZ} = coordconvert(Dimensions, 'XY', exportedXYNo(iXY), 'Z', exportedZNo(iZ), 'T', slice(1):exportInterval:slice(2));
+                    exportedFrame{iXY, iZ} = coordconvert(Dimensions, 'XY', exportedXYNo(iXY), 'Z', exportedZNo(iZ), 'T', exportedT(1):exportEveryNumFrame:exportedT(2));
 %                 end
                 
                 exportedFrame{iXY, iZ}(exportedFrame{iXY, iZ} > nImg) = [];

@@ -6,7 +6,11 @@ elseif nargin == 3
     startTime = varargin{1};
 end
 
-[imgHeight, imgWidth, nImg] = size(img);
+imgSize = size(img);
+imgHeight = imgSize(1);
+imgWidth = imgSize(2);
+nImg = imgSize(end);
+% [imgHeight, imgWidth, nImg] = size(img);
 if nImg == 1
     imgTime = img;
     return
@@ -28,7 +32,8 @@ timeSeq = postInfo.timeSeq{1};
 timeSeq = timeSeq - timeSeq(1);
 % Calculate the time interval (s)
 if period < 1
-    decimalNo = -floor(log10(period));
+    %     decimalNo = -floor(log10(period));
+    decimalNo = 1;
     period = round(period, 3);  % s
 else
     decimalNo = 0;
@@ -39,9 +44,9 @@ singleNo = floor(log10(duration))+1;
 fontsize = round(26/720*min(size(img, [1 2])));
 
 for iImg = 1:nImg
-    
+
     timeStamp = timeSeq(iImg)+startTime;
-    
+
     % Evaluate time format
     if duration < 300 && period < 1
         % if period is shorter than 5 min.  format x.xx s.
@@ -65,12 +70,12 @@ for iImg = 1:nImg
             textStr = sprintf('%02d:%02d:%02d (h:m:s)',hour, minute, sec);
         end
     end
-    
+
     RGB = insertText(imgTime(:,:,iImg),position,textStr,'Font','Lucida Console' ,'FontSize',fontsize,'BoxOpacity', 0, 'TextColor',textcolor);
-    
+
     imgTime(:,:,iImg) = RGB(:,:,1);
-    
-%     dispbar(iImg, nImg);
+
+    %     dispbar(iImg, nImg);
 end
 
 end

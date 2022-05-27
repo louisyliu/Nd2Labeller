@@ -28,9 +28,9 @@ for iXY = 1:size(frames, 1)
         currentChannel = 1;
         channelContrast = zeros(numel(exportedChannelNo), 2);
         for iChannel = exportedChannelNo
-            [lowv1, highv1] = manualcontrast(im1);
-            [lowv2, highv2] = manualcontrast(im2);
-            [lowv3, highv3] = manualcontrast(im3);
+            [lowv1, highv1] = manualcontrast(im1(:,:,iChannel));
+            [lowv2, highv2] = manualcontrast(im2(:,:,iChannel));
+            [lowv3, highv3] = manualcontrast(im3(:,:,iChannel));
             channelContrast(currentChannel,:) = [min([lowv1, lowv2, lowv3]) max([highv1, highv2, highv3])];
             currentChannel = currentChannel + 1;
         end

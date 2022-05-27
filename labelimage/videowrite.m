@@ -5,6 +5,7 @@ if isCompressed
     v.Quality = 100;
 else
     v = VideoWriter(savename, 'Grayscale AVI');
+% v = VideoWriter(savename, 'Uncompressed AVI');
 end
 
 v.FrameRate = framerate;

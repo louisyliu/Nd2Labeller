@@ -2,10 +2,10 @@
 
 %% File:
 % filename, savedir
-filename = 'G:\project\20220306_510_flask\4x_510_17h_OD15_closePDMSchamber30C.nd2';
-% savedir = 'E:\exp_script\GitProject\sample\';
-[filedir, file, ~] = fileparts(filename);
-savedir = strrep(filedir, 'project', 'project_processed');
+filename = 'G:\exp_script\GitProject\sample\multchannel.nd2';
+savedir = 'G:\exp_script\GitProject\sample\';
+% [filedir, file, ~] = fileparts(filename);
+% savedir = strrep(filedir, 'project', 'project_processed');
 if ~exist(savedir, 'dir')
     mkdir(savedir)
 end
@@ -18,10 +18,11 @@ nFreqDiv = 1;
 startTime = 0; % s
 
 %% Exported images:
-% slice, exportedFreqChannelNo, shortestSideLength, isImgCombined,
-% hasScalebar, hasScaleText, hasTimeStamp.
+% exportedT, exportedFreqChannelNo, shortestSideLength, needImgCombined,
+% needScalebar, needScaleText, needTimeStamp. 
+% Empty for all.
 
-exportPara.slice = [1 540];
+exportPara.exportedT = [1 5]; % T from T(1) to T(2)
 exportPara.exportEveryNumFrame = 2;
 
 % At most two dimensions can be selected. For example, if channelNo and
@@ -32,11 +33,11 @@ exportPara.exportedXYNo = [];
 exportPara.exportedZNo = [];
 exportPara.shortestSideLength = 720;
 
-processPara.contrastMethod = 2; % 0: no contrast; 1: auto contrast; 2: manual contrast
-processPara.isImgCombined = 1;
-processPara.hasScalebar = 1;
-processPara.hasScaleText =1;
-processPara.hasTimeStamp = 1;
+processPara.contrastMethod = 1; % 0: no adjust contrast; 1: auto contrast; 2: manual contrast
+% processPara.needImgCombined = 1;
+processPara.needScalebar = 1;
+processPara.needScaleText =1;
+processPara.needTimeStamp = 1;
 
 %% Video:
 % isCompressed, frameRate.
@@ -46,8 +47,8 @@ frameRate = 20;
 
 %% Snapshot montage:
 % needSnapshot, nSnap
-needSnapshot = 1;
+needSnapshot = 0;
 nSnap = 4;
 
-%% EXE
-demolabelimg;
+%% Execute
+labelimage;
