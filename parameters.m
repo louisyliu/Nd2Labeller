@@ -2,10 +2,10 @@
 
 %% File:
 % filename, savedir
-filename = 'G:\exp_script\GitProject\sample\multchannel.nd2';
-savedir = 'G:\exp_script\GitProject\sample\';
-% [filedir, file, ~] = fileparts(filename);
-% savedir = strrep(filedir, 'project', 'project_processed');
+filename = 'E:\project\20220528_droplet\20x_g10cell_d10_glasschamber_YW263_pc_movie.nd2';
+% savedir = 'G:\exp_script\GitProject\sample\';
+[filedir, file, ~] = fileparts(filename);
+savedir = strrep(filedir, 'project', 'project_processed');
 if ~exist(savedir, 'dir')
     mkdir(savedir)
 end
@@ -22,8 +22,8 @@ startTime = 0; % s
 % needScalebar, needScaleText, needTimeStamp. 
 % Empty for all.
 
-exportPara.exportedT = [1 5]; % T from T(1) to T(2)
-exportPara.exportEveryNumFrame = 2;
+exportPara.exportedT = []; % T from T(1) to T(2)
+exportPara.exportEveryNumFrame = 3;
 
 % At most two dimensions can be selected. For example, if channelNo and
 % XYNo contains multiple elements, ZNo must be a scalar.
@@ -33,7 +33,7 @@ exportPara.exportedXYNo = [];
 exportPara.exportedZNo = [];
 exportPara.shortestSideLength = 720;
 
-processPara.contrastMethod = 1; % 0: no adjust contrast; 1: auto contrast; 2: manual contrast
+processPara.contrastMethod = 2; % 0: no adjust contrast; 1: auto contrast; 2: manual contrast
 % processPara.needImgCombined = 1;
 processPara.needScalebar = 1;
 processPara.needScaleText =1;
