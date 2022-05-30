@@ -24,11 +24,11 @@ Requirements: __Matlab__, __[Nd2SdkMatlab](https://github.com/tytghy/Nd2SdkMatla
 
 ### Image acquisition
 
-Note: The program can automatically recognize the objective from the filename in a format like '**\_10x_**', '**10x_**'.  It is stronlgy suggested that you modify the filename for better experience.
+Note: The program can automatically recognize the objective first from the filename in a format like '**\_10x_**', '__10x___', '**_10x**'.  If it is not specified in the filename, then program will check the metadata.  Lastly, it will check parameter of `objective` below.  It is stronlgy suggested that you modify the filename for better experience.  Otherwise, wrong objective from the metadata may mislead the program about the objective we actually used.
 
 | Parameters | Description |
 | ----------- | ----------- |
-| `objective` | Objective used.  If you have a filename specified the objective, the program will ignore this parameter.  |
+| `objective` | Objective used.  If you have a filename or nd2 metadata specified the objective, the program will ignore this parameter.  |
 | `nFreqDiv` | Number of frequency division. E.g., `1`|
 | `startTime` | Starting time (s).  E.g., `0`|
 
@@ -73,20 +73,20 @@ You can attach the snapshot in the report and briefly see what's going on withou
 
 ## Output example
 
-To see the fast-evolved phenomenon simultaneously in fluorescence and phase contrast microscopy, we acquired a fast timelapse image sequence with fluorescent (f) and phase contrast (pc) images in alternate frames using [Custom-build Multichannel Splitter](https://wulab.yuque.com/wulab/knowledgebook/multi-channel-splitter).  Here, we used the program below to output the video.  The key is to set `nFreqDiv = 2` because the iamge sequence is splitted manually into two channels of order pc-f-pc-f. 
+To see the fast-evolved phenomenon simultaneously in fluorescence and phase contrast microscopy, we acquired a fast timelapse image sequence with fluorescent (f) and phase contrast (pc) images in alternate frames.  Here, we used the program below to output the video.  The key is to set `nFreqDiv = 2` because the iamge sequence is splitted manually into two channels of order pc-f-pc-f. 
 
 ```matlab
 % Parameters for ND2 to video with scalebar and time stamp.
 
 %% File:
 % filename, savedir
-filename = 'G:\exp_script\GitProject\sample\20x_phase_contrast_fluorescent_images.nd2';
-savedir = 'G:\exp_script\GitProject\sample\';
+filename = 'G:\20x_phase_contrast_fluorescent_images.nd2';
+savedir = 'G:\';
 
 %% Image acquisition:
 % objective, nFreqChannel, nPosFrames.
 
-objective = 10; % as objective is indicated in filename, program will ignore this line.
+objective = 20; % as objective is indicated in filename, program will ignore this line.
 nFreqDiv = 2;
 startTime = 0; % s
 
