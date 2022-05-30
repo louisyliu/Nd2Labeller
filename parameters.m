@@ -2,13 +2,13 @@
 
 %% File:
 % filename, savedir
-filename = 'E:\project\20220528_droplet\20x_g10cell_d10_glasschamber_YW263_pc_movie.nd2';
-% savedir = 'G:\exp_script\GitProject\sample\';
-[filedir, file, ~] = fileparts(filename);
-savedir = strrep(filedir, 'project', 'project_processed');
-if ~exist(savedir, 'dir')
-    mkdir(savedir)
-end
+filename = 'G:\sample.nd2';
+savedir = 'G:\';
+% [filedir, file, ~] = fileparts(filename);
+% savedir = strrep(filedir, 'project', 'project_processed');
+% if ~exist(savedir, 'dir')
+%     mkdir(savedir)
+% end
 
 %% Image acquisition:
 % objective, nFreqChannel, nPosFrames.
@@ -23,7 +23,7 @@ startTime = 0; % s
 % Empty for all.
 
 exportPara.exportedT = []; % T from T(1) to T(2)
-exportPara.exportEveryNumFrame = 3;
+exportPara.exportEveryNumFrame = 2;
 
 % At most two dimensions can be selected. For example, if channelNo and
 % XYNo contains multiple elements, ZNo must be a scalar.
