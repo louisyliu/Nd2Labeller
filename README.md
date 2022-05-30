@@ -6,7 +6,7 @@ Free your hands and no worry about low memory anymore!
 
 This program helps to convert nikon .nd2 file into .mp4 video with scalebar and timestamp in MATLAB with one click.  It automatically regconizes the objectives from filename and time points of images from the metadata, and is able to combine and output a multi-channel video of desired contrast.  
 
-IMPORTANT: Require [Nd2SdkMatlab](https://github.com/tytghy/Nd2SdkMatlab/) to read nd2 file.  
+Requirements: __Matlab__, __[Nd2SdkMatlab](https://github.com/tytghy/Nd2SdkMatlab/)__ to read nd2 file, __Computer Vision Toolbox__ (installed in 'HOME' > 'Add-Ons').
 
 ## Basic Usage
 
