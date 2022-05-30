@@ -4,14 +4,10 @@
 % filename, savedir
 filename = 'G:\sample.nd2';
 savedir = 'G:\';
-% [filedir, file, ~] = fileparts(filename);
-% savedir = strrep(filedir, 'project', 'project_processed');
-% if ~exist(savedir, 'dir')
-%     mkdir(savedir)
-% end
+
 
 %% Image acquisition:
-% objective, nFreqChannel, nPosFrames.
+% objective, nFreqDiv, startTime.
 
 objective = 4;
 nFreqDiv = 1;
@@ -33,8 +29,7 @@ exportPara.exportedXYNo = [];
 exportPara.exportedZNo = [];
 exportPara.shortestSideLength = 720;
 
-processPara.contrastMethod = 2; % 0: no adjust contrast; 1: auto contrast; 2: manual contrast
-% processPara.needImgCombined = 1;
+processPara.contrastMethod = 2; % 0: do nothing; 1: auto contrast; 2: manual contrast
 processPara.needScalebar = 1;
 processPara.needScaleText =1;
 processPara.needTimeStamp = 1;
