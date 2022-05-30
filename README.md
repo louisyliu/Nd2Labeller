@@ -26,6 +26,8 @@ Requirements: __Matlab__, __[Nd2SdkMatlab](https://github.com/tytghy/Nd2SdkMatla
 
 Note: The program can automatically recognize the objective first from the filename in a format like '**\_10x_**', '__10x___', '**_10x**'.  If it is not specified in the filename, then program will check the metadata.  Lastly, it will check parameter of `objective` below.  It is stronlgy suggested that you modify the filename for better experience.  Otherwise, wrong objective from the metadata may mislead the program about the objective we actually used.
 
+A 6.5 µm pixel camera sensor is used by default.  This means that with a 60x objective, the pixel size at the image is in fact 6.5/60 = 0.108 µm or 108 nm.
+
 | Parameters | Description |
 | ----------- | ----------- |
 | `objective` | Objective used.  If you have a filename or nd2 metadata specified the objective, the program will ignore this parameter.  |
