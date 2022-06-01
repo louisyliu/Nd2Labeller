@@ -15,7 +15,7 @@ Dimensions = ImgInfo.Dimensions;
 % posFramesNo = contains(type, 'XY') | contains(type, 'Z');
 % exportInterval = exportEveryNumFrame * nFreqDiv * prod(count(posFramesNo));
 nImg = ImgInfo.nImg; % number of frames
-if isfield(ImgInfo, 'objective')
+if isfield(ImgInfo, 'objectiveFromFilename')
     objective = ImgInfo.objective;
 end
 
@@ -36,7 +36,7 @@ else
     type = {Dimensions.type};
     count = [Dimensions.count];
     posFramesNo = contains(type, 'XY') | contains(type, 'Z');
-    exportInterval = exportEveryNumFrame * nFreqDiv * prod(count(posFramesNo));
+%     exportInterval = exportEveryNumFrame * nFreqDiv * prod(count(posFramesNo));
     % one channel (frequency division)
     if nFreqDiv > 1
         if isempty(exportedFreqNo)
