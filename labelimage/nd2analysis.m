@@ -16,7 +16,7 @@ Dimensions = ImgInfo.Dimensions;
 % exportInterval = exportEveryNumFrame * nFreqDiv * prod(count(posFramesNo));
 nImg = ImgInfo.nImg; % number of frames
 if isfield(ImgInfo, 'objectiveFromFilename')
-    objective = ImgInfo.objective;
+    objective = ImgInfo.objectiveFromFilename;
 end
 
 temp = nd2read(filename, 1);
@@ -67,7 +67,7 @@ else
     else    % multichannel
         
         if isempty(exportedT)
-            exportedT = [1 nImg];
+            exportedT = [1 count(contains(type, 'T'))];
         end
         
         if any(contains(type, 'XY'))
