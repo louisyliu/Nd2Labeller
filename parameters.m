@@ -2,15 +2,15 @@
 
 %% File:
 % filename, savedir
-filename = 'G:\sample.nd2';
-savedir = 'G:\';
+filename = 'G:\exp_script\GitProject\sample\splitfreq.nd2';
+savedir = 'G:\exp_script\GitProject\sample\';
 
 
 %% Image acquisition:
 % objective, nFreqDiv, startTime.
 
 objective = 4;
-nFreqDiv = 1;
+nFreqDiv = 2;
 startTime = 0; % s
 
 %% Exported images:
@@ -18,7 +18,7 @@ startTime = 0; % s
 % needScalebar, needScaleText, needTimeStamp. 
 % Empty for all.
 
-exportPara.exportedT = []; % T from T(1) to T(2)
+exportPara.exportedT = [1 100]; % T from T(1) to T(2)
 exportPara.exportEveryNumFrame = 2;
 
 % At most two dimensions can be selected. For example, if channelNo and
