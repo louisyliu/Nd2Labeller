@@ -10,3 +10,5 @@
 # Packaged app and toolbox files
 *.mlappinstall
 *.mltbx
+
+parameters.m
