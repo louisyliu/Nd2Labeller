@@ -41,7 +41,7 @@ else
 end
 singleNo = floor(log10(duration))+1;
 
-fontsize = round(26/720*min(size(img, [1 2])));
+fontsize = round(30/720*max(postInfo.compressedSize)); % default 26 pt for 720 px
 
 for iImg = 1:nImg
 
