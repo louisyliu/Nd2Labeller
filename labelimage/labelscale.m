@@ -5,10 +5,11 @@ scale = postInfo.scale;
 [imgHeight, imgWidth] = deal(postInfo.compressedSize(1), postInfo.compressedSize(2));
 
 %Evaluate the position and width of a scale bar.
-right = round(0.028 * imgWidth); % dist of scalebar to right side
+% right = round(0.028 * imgWidth); % dist of scalebar to right side
+right = round(0.04 * imgWidth);
 bot = round(0.046 * imgHeight); % dist of scalebar to bot side
 barHeight = round(0.014 * imgHeight);
-barWidth = round(0.18 * imgHeight);
+barWidth = round(0.18 * imgWidth);
 realBarWidth = barWidth * scale;
 realBarWidth = round(realBarWidth, -floor(log10(realBarWidth)));
 barWidth = round(realBarWidth / scale);
