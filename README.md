@@ -112,7 +112,7 @@ If `processPara.drawROI = 1` is selected, you can freely select the squared ROI.
 > 2. Draw ROI.  The ROI you draw in any of three images will map onto the other two.  
 > 3. Close window.
 
-### 5. Have a cup of tea :coffee
+### 5. Have a cup of tea :coffee:
 
 ![Progress bar](img/processing_bar.gif)
 
@@ -122,7 +122,7 @@ Below is the snapshot of the output video.
 
 ![Snapshot](img/output_video.png)
 
-* ## Parameters
+## Parameters
 
 There are parameters about file, image acquisition, exported setting, image post-processing and output video in `parameters.m`.  Listed below are the details of parameters.
 
