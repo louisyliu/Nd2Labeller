@@ -1,19 +1,130 @@
-# VideoLabeller
+            __      ___     _              _           _           _ _
+            \ \    / (_) __| | ___  ___   | |     ____| |__   ___ | | | ___  _____
+             \ \  / /| |/ _  |/ _ \/ _ \  | |    / _  |  _ \ / _ \| | |/ _ \|  __/
+              \ \/ / | | (_| |  __/ ( ) | | |___| (_| | |_) |  __/| | |  __/| |
+               \__/  |_|\____|\___|\___/  |__ __|\____|_ __/ \____|_|_|\____|_|
 
-Convert nd2 file into mp4 video with scalebar and timestamp in MATLAB.
+# VideoLabeller: Easy to convert and label `.nd2` file
 
-Free your hands and no worry about low memory anymore!
+![license](https://img.shields.io/badge/License-MIT-green)
 
-This program helps to convert nikon .nd2 file into .mp4 video with scalebar and timestamp in MATLAB with one click.  It automatically regconizes the objectives from filename and time points of images from the metadata, and is able to combine and output a multi-channel video of desired contrast.  
+To convert `.nd2` file into labelled `.mp4` video in MATLAB.
 
-Requirements: __Matlab__, __[Nd2SdkMatlab](https://github.com/tytghy/Nd2SdkMatlab/)__ to read nd2 file, __Computer Vision Toolbox__ (installed in 'HOME' > 'Add-Ons').
+<!-- GETTING STARTED -->
+## Getting Started
 
-## Basic Usage
+### Prerequisites
 
-1. Adjust the parameters in `parameters.m`.
+- __Matlab__
+
+- __Computer Vision Toolbox__ ('Home' --> 'Add-Ons') to fast label video.
+
+- __Image Processing Toolbox__ ('Home' --> 'Add-Ons') to load GUI.
+
+- __[Nd2SdkMatlab](https://github.com/tytghy/Nd2SdkMatlab/)__ to read `.nd2` file.
+
+### Installation Options
+
+1. Install with [`git`](https://git-scm.com/)
+
+    ```sh
+    git clone https://github.com/tytghy/VideoLabeller.git
+    ```
+
+2. Download ZIP from [VideoLabeller](https://github.com/tytghy/VideoLabeller) and unzip the files.  
+
+## Usage
+
+1. Adjust the parameters in `parameters.m` based on the rawdata.
 2. Run it.
 
-## Parameters
+> Also see **[Example](#example)**.
+
+## Example
+
+> To see the fast-moving motion in fluorescence and phase contrast microscopy simultaneously, we acquired a fast timelapse image sequence with fluorescent (f) and phase contrast (pc) images in alternate frames.  Here, we used the program below to output the video.  
+>  
+> The key is to set `nFreqDiv = 2` because the image sequence follows order pc-f-pc-f.
+>
+> Follow the steps below to have a try.
+
+### 1. Adjust parameters in `parameters.m`
+
+```matlab
+%% File:
+filename = 'G:\20x_phase_contrast_fluorescent_images.nd2';
+savedir = 'G:\';
+
+%% Image acquisition:
+objective = 20; % as objective is indicated in filename, the program will ignore this line.
+nFreqDiv = 2; % Importance
+startTime = 0; % Starting time will be 0 s.
+
+%% Exported images:
+% Empty for all.
+exportPara.exportedT = []; % output all time series.
+exportPara.exportEveryNumFrame = 2; % output every 2 frames.
+
+% At most two dimensions can be selected. For example, if channelNo and
+% XYNo contains multiple elements, ZNo must be a scalar.
+exportPara.exportedFreqNo = []; 
+exportPara.exportedChannelNo = []; 
+exportPara.exportedXYNo = [];
+exportPara.exportedZNo = [];
+exportPara.shortestSideLength = 720;
+
+processPara.contrastMethod = 2; % manually adjust contrast; 
+processPara.drawROI = 1; % draw ROI.
+processPara.needScalebar = 1; % label scalebar; 
+processPara.needScaleText =1; % label text of scalebar; 
+processPara.needTimeStamp = 1; % label timestamp; 
+processPara.title = {'Phase contrast', 'FITC'}; % label title of each channel.
+
+%% Video:
+isCompressed = 1; % output compressed 'MPEG-4'
+frameRate = 20; % 20 fps
+
+%% Execute
+labelimage;
+```
+
+### 2. Run `parameters.m`
+
+Simply click `Run` or select all followed by press `F9`.
+
+### 3. Manually adjust contrast (Optional)
+
+If `processPara.contrastMethod = 2` is selected, you need to manually adjust contrast of images.  A built-in GUI pops out (see below).
+
+![Manually adjust contrast](img/manually_adjust_contrast.png)
+
+> You are asked to adjust contrast of several groups of images depending on how many channels are exported.  Here, it is two.  Close the window after adjusting the contrast.  Do not click `Adjust Data`.
+
+### 4. Draw ROI (Optional)
+
+If `processPara.drawROI = 1` is selected, you can freely select the squared ROI.  A custom-programed GUI pops out (see below).
+
+![ROI selection](img/ROI.png)
+
+> You are asked to select ROI of only one group of images.  The other channel will follow the same ROI in this group.  
+>
+> 1. Input rotated angle.
+> 2. Draw ROI.  The ROI you draw in any of three images will map onto the other two.  
+> 3. Close window.
+
+### 5. Have a cup of tea :coffee
+
+![Progress bar](img/processing_bar.gif)
+
+### 6. Done.  Check in the `savedir`
+
+Below is the snapshot of the output video.
+
+![Snapshot](img/output_video.png)
+
+* ## Parameters
+
+There are parameters about file, image acquisition, exported setting, image post-processing and output video in `parameters.m`.  Listed below are the details of parameters.
 
 ### File
 
@@ -24,15 +135,17 @@ Requirements: __Matlab__, __[Nd2SdkMatlab](https://github.com/tytghy/Nd2SdkMatla
 
 ### Image acquisition
 
-Note: The program can automatically recognize the objective first from the filename in a format like '**\_10x_**', '__10x___', '**_10x**'.  If it is not specified in the filename, then program will check the metadata.  Lastly, it will check parameter of `objective` below.  It is stronlgy suggested that you modify the filename for better experience.  Otherwise, wrong objective from the metadata may mislead the program about the objective we actually used.
-
-A 6.5 µm pixel camera sensor is used by default.  This means that with a 60x objective, the pixel size at the image is in fact 6.5/60 = 0.108 µm or 108 nm.
-
 | Parameters | Description |
 | ----------- | ----------- |
-| `objective` | Objective used.  If you have a filename or nd2 metadata specified the objective, the program will ignore this parameter.  |
+| `objective` | Objective used.  If the objective is specified in the filename, the program will ignore this parameter.  |
 | `nFreqDiv` | Number of frequency division. E.g., `1`|
-| `startTime` | Starting time (s).  E.g., `0`|
+| `startTime` | Starting time (unit: s).  E.g., `0`|
+
+> __Note__
+>
+> - The program recognizes the keyword `_?x_`, `?x_` and `_?x.nd2` as objective used. E.g., objective will be recognized as 20 for the filename of '20x_cell.nd2', 'cell_20x.nd2', 'cell_20x_liquid.nd2'.
+>
+> - A 6.5 µm pixel camera sensor is used by default.  This means that with a 10x objective, the pixel size at the image is in fact 6.5/10 = 0.65 µm.
 
 ### Exported images
 
@@ -40,102 +153,54 @@ All the parameters related to the exported channels include in the struct `expor
 
 | Parameters | Description |
 | ----------- | ----------- |
-| `exportedT` | Export images of time (frame) ranging from `exportedT(1)` to `exportedT(2)`.  Leave it empty `[]` if all are wanted.  E.g., `[1 200]`|
-| `exportEveryNumFrame` | Export images every `exportEveryNumFrame` frames. E.g., `2`|
-| `exportedFreqNo` | If `nFreqDiv` is not 1, export images in Channel `exportedFreqNo`. Leave it empty `[]` if all are wanted.  E.g., `[]`|
-| `exportedChannelNo` | Export images in $\lambda$ Channel `exportedChannelNo`. Leave it empty `[]` if all are wanted. E.g., `[1 2 3]`|
-| `exportedXYNo` | Export images in $XY$ Channel `exportedXYNo`. Leave it empty `[]` if all are wanted. E.g., `[1 2 3]`|
-| `exportedZNo` | Export images in $Z$ Channel `exportedZNo`. Leave it empty `[]` if all are wanted. E.g., `[]` |
-| `shortestSideLength` | The wanted length of shortest side of resized output video.  E.g., `720`.|
+| `exportedT` | Export images of time (or frame) ranging from `exportedT(1)` to `exportedT(2)`.  Leave it empty `[]` if all are wanted. <br /> E.g., `[1 200]`|
+| `exportEveryNumFrame` | Export images every `exportEveryNumFrame` frames. <br /> E.g., `2`|
+| `exportedFreqNo` | If `nFreqDiv` is not 1, export images in Channel No. `exportedFreqNo`. Leave it empty `[]` if all are wanted. <br /> E.g., `[1]`|
+| `exportedChannelNo` | Export images of $\lambda$ Channel No. `exportedChannelNo`. Leave it empty `[]` if all are wanted. <br /> E.g., `[1 2 3]`|
+| `exportedXYNo` | Export images of $XY$ Channel No. `exportedXYNo`. Leave it empty `[]` if all are wanted. <br /> E.g., `[1 2 3]`|
+| `exportedZNo` | Export images in $Z$ Channel No. `exportedZNo`. Leave it empty `[]` if all are wanted. <br /> E.g., `[]` |
+| `shortestSideLength` | The wanted length of shortest side of the output video.  <br /> E.g., `720`|
 
-### Post-processing images
+### Image post-processing
+
+All the parameters related to the image post-processing include in the struct `processPara`.
 
 | Parameters | Description |
 | ----------- | ----------- |
-| `contrastMethod` | Method to adjust contrast of video.  `0`: do nothing; `1`: auto contrast; `2`: manual contrast.  E.g., `2`|
-| `needScalebar` | Label scale bar? `0`: No need; `1`: Need|
-| `needScaleText` | Label the corresonding size of scale bar?  `0`: No need; `1`: Need|
-| `needTimeStamp` | Label the time stamp? `0`: No need; `1`: Need|
+| `contrastMethod` | Method to adjust contrast of video. <br /> `0`: Do nothing; `1`: Auto; `2`: Manual.|
+| `drawROI` | Draw ROI? <br /> `0`: No; `1`: Yes. |
+| `needScalebar` | Label scale bar?  <br /> `0`: No; `1`: Yes |
+| `needScaleText` | Label the actual size of scale bar?  <br />  `0`: No; `1`: Yes |
+| `needTimeStamp` | Label the time stamp? <br />  `0`: No; `1`: Yes |
+| `title` | Title of each channel.  It is a cell array of character vectors.  <br /> E.g., `{'FITC', 'mCherry'}`|
+
+> __Note__
+>
+> A GUI will pop out, allowing you to adjust contrast or draw ROI, if `contrastMethod = 2` or `drawROI = 1`.  See [Example](#example).
 
 ### Output video
 
 | Parameters | Description |
 | ----------- | ----------- |
-| `isCompressed` | Compress the output video? `0`: output a high-resolution but large .avi video; `1`: output a compressed but small .mp4 video.|
-| `frameRate` | Frame rate of output video.  E.g., `20`. |
+| `isCompressed` | Compress the output video? <br /> `0`: No, output an uncompressed `.avi` file with grayscale video; <br /> `1`: Yes, output a `.mp4` file with H.264 encoding.|
+| `frameRate` | Frame rate of output video. <br /> E.g., `20` |
 
-### Snapshot
+<!-- ### Snapshot
 
 You can attach the snapshot in the report and briefly see what's going on without watching a video.
 
 | Parameters | Description |
 | ----------- | ----------- |
-| `needSnapshot` | Need snapshots? `0`: No need; `1`: Need|
-| `nSnap` | How many snapshots do you need? E.g., `4`. |
+| `needSnapshot` | Need snapshots? `0`: No; `1`: Yes |
+| `nSnap` | How many snapshots do you need? E.g., `4`. | -->
 
-## Output example
+## Acknowledgements
 
-To see the fast-evolved phenomenon simultaneously in fluorescence and phase contrast microscopy, we acquired a fast timelapse image sequence with fluorescent (f) and phase contrast (pc) images in alternate frames.  Here, we used the program below to output the video.  The key is to set `nFreqDiv = 2` because the iamge sequence is splitted manually into two channels of order pc-f-pc-f. 
+Some interesting resource lists:
 
-```matlab
-% Parameters for ND2 to video with scalebar and time stamp.
+- [ASCII Art Archive](https://www.asciiart.eu/)
+- [GitHub Emoji Cheat Sheet](https://www.webpagefx.com/tools/emoji-cheat-sheet)
 
-%% File:
-% filename, savedir
-filename = 'G:\20x_phase_contrast_fluorescent_images.nd2';
-savedir = 'G:\';
+## License
 
-%% Image acquisition:
-% objective, nFreqChannel, nPosFrames.
-
-objective = 20; % as objective is indicated in filename, program will ignore this line.
-nFreqDiv = 2;
-startTime = 0; % s
-
-%% Exported images:
-% exportedT, exportedFreqChannelNo, shortestSideLength, needImgCombined,
-% needScalebar, needScaleText, needTimeStamp. 
-% Empty for all.
-
-exportPara.exportedT = []; % T from T(1) to T(2)
-exportPara.exportEveryNumFrame = 2; % output every frame needs more memory.  here output every 2 frame.
-
-% At most two dimensions can be selected. For example, if channelNo and
-% XYNo contains multiple elements, ZNo must be a scalar.
-exportPara.exportedFreqNo = []; 
-exportPara.exportedChannelNo = []; 
-exportPara.exportedXYNo = [];
-exportPara.exportedZNo = [];
-exportPara.shortestSideLength = 720;
-
-processPara.contrastMethod = 1; % 0: no adjust contrast; 1: auto contrast; 2: manual contrast
-processPara.needScalebar = 1;
-processPara.needScaleText =1;
-processPara.needTimeStamp = 1;
-
-%% Video:
-% isCompressed, frameRate.
-isCompressed = 1; % 1 for 'MPEG-4' and 0 for 'Grayscale AVI'
-frameRate = 20;
-
-%% Snapshot montage:
-% needSnapshot, nSnap
-needSnapshot = 0;
-nSnap = 4;
-
-%% Execute
-labelimage;
-```
-
-
-A snapshot of the output video:
-
-![phase-contrast and fluroescent image](img/snapshot.png "A snapshot of the output video")
-
-## Adjust contrast manually
-
-If you are sad for auto-contrast, i.e., `contrastMethod = 1`, then try to adjust contrast manually by `contrastMethod = 2`.  
-
-In this senario, you are asked to adjust 3 images from each channel.  Close the window after adjusting the contrast.  Do not click `Adjust Data`.  
-
-![phase-contrast and fluroescent image](img/manualcontrast.png "A snapshot of the output video")
+This project is licensed under the terms of the [MIT](/LICENSE).
