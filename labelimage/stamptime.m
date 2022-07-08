@@ -44,7 +44,7 @@ singleNo = floor(log10(duration))+1;
 fontsize = round(30/720*max(postInfo.compressedSize)); % default 26 pt for 720 px
 
 for iImg = 1:nImg
-
+    
     timeStamp = timeSeq(iImg)+startTime;
 
     % Evaluate time format
