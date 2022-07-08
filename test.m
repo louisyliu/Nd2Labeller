@@ -6,15 +6,15 @@ disptitle('Finish Loading')
 if processPara.contrastMethod == 2
     postInfo.manualContrastPara = manualcontrastmovie(filename, postInfo.frames, postInfo.exportedChannelNo);
 end
+if processPara.drawROI == 1
+    [postInfo.rotateAngle, postInfo.roiRect, postInfo.cropSize] = drawroiGUI(filename, postInfo, processPara.contrastMethod).getroi(); % [x y width height]
+    postInfo = updateroiinfo(postInfo, exportPara.shortestSideLength);
+end
 
 imgCompressed = imgcompress(filename, postInfo, processPara.contrastMethod);
 nImg = size(imgCompressed, 3);
 % Concatenate image stack
-if processPara.needImgCombined
-    imgCat = catimg(imgCompressed, postInfo);
-else
-    imgCat = imgCompressed;
-end
+imgCat = catimg(imgCompressed, postInfo);
 % Stamp time
 if processPara.needTimeStamp && nImg > 1
     disptitle('Stamping time')
@@ -22,15 +22,22 @@ if processPara.needTimeStamp && nImg > 1
 else
     imgTime = imgCat;
 end
+% Label title
+if ~isempty(processPara.title)
+    disptitle('Label title')
+    imgTitle = labeltitle(imgTime, postInfo, processPara.title);
+else
+    imgTitle = imgTime;
+end
 % Label scalebar
 if processPara.needScalebar
-    [imgScalebar, barInfo] = labelscale(imgTime, postInfo);
+    [imgScalebar, barInfo] = labelscale(imgTitle, postInfo);
 else
     imgScalebar = imgTime;
 end
 % Label text of scalebar
 if processPara.needScaleText && nImg > 1
-    imgText = labeltext(imgScalebar, barInfo);
+    imgText = labelscaletext(imgScalebar, barInfo, postInfo);
 else
     imgText = imgScalebar;
 end
@@ -45,22 +52,22 @@ else
 end
 
 % Need Snapshot
-if needSnapshot && nImg > 1
-    disptitle('Generating the snapshots');
-    iSnapshot = round(linspace(1,size(imgTime, 3)-10, nSnap));
-    icurrent = 0;
-    snapshot = cell(nSnap, 1);
-    for i = iSnapshot
-        icurrent = icurrent + 1;
-        if i == iSnapshot(end)
-            snapshot{icurrent} = labelscale(imgTime(:,:,i), postInfo);
-        else
-            snapshot{icurrent} = imgTime(:,:,i);
-        end
-    end
-    figure
-    montage(snapshot, 'ThumbnailSize', []);
-    axis off;
-
-saveas(gcf, [savename '.png']);
-end
+% if needSnapshot && nImg > 1
+%     disptitle('Generating the snapshots');
+%     iSnapshot = round(linspace(1,size(imgTime, 3)-10, nSnap));
+%     icurrent = 0;
+%     snapshot = cell(nSnap, 1);
+%     for i = iSnapshot
+%         icurrent = icurrent + 1;
+%         if i == iSnapshot(end)
+%             snapshot{icurrent} = labelscale(imgTime(:,:,i), postInfo);
+%         else
+%             snapshot{icurrent} = imgTime(:,:,i);
+%         end
+%     end
+%     figure
+%     montage(snapshot, 'ThumbnailSize', []);
+%     axis off;
+% 
+% saveas(gcf, [savename '.png']);
+% end

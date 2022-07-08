@@ -2,9 +2,15 @@
 
 %% File:
 % filename, savedir
-filename = 'G:\sample.nd2';
-savedir = 'G:\';
-
+filename = 'E:\project\20220703_plume_510\4x_510od15_closedPDMSwell_500umthick_biggestsize_g_d_unknown_DNA_unknown_localocillation.nd2';
+% savedir = 'E:\paper_active_bulging\SIMovie\';
+% savedir = 'G:\exp_script\GitProject\sample\';
+[filedir, file, ~] = fileparts(filename);
+savedir = strrep(filedir, 'project', 'project_processed');
+savedir = [savedir '\'];
+if ~exist(savedir, 'dir')
+    mkdir(savedir)
+end
 
 %% Image acquisition:
 % objective, nFreqDiv, startTime.
@@ -18,7 +24,7 @@ startTime = 0; % s
 % needScalebar, needScaleText, needTimeStamp. 
 % Empty for all.
 
-exportPara.exportedT = []; % T from T(1) to T(2)
+exportPara.exportedT = [1 2000]; % T from T(1) to T(2)
 exportPara.exportEveryNumFrame = 2;
 
 % At most two dimensions can be selected. For example, if channelNo and
@@ -29,10 +35,14 @@ exportPara.exportedXYNo = [];
 exportPara.exportedZNo = [];
 exportPara.shortestSideLength = 720;
 
+%% 
 processPara.contrastMethod = 2; % 0: do nothing; 1: auto contrast; 2: manual contrast
+processPara.drawROI = 0; % 0: do nothing; 1: draw ROI.
 processPara.needScalebar = 1;
 processPara.needScaleText =1;
 processPara.needTimeStamp = 1;
+processPara.title = {}; % title: cell array of character vectors 
+
 
 %% Video:
 % isCompressed, frameRate.
@@ -42,8 +52,8 @@ frameRate = 20;
 
 %% Snapshot montage:
 % needSnapshot, nSnap
-needSnapshot = 0;
-nSnap = 4;
+% needSnapshot = 0;
+% nSnap = 4;
 
 %% Execute
 labelimage;
