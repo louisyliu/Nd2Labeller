@@ -4,5 +4,5 @@
 *.mlappinstall
 *.mltbx
 parameters.m
-*test*
 *.pptx
+demo.m

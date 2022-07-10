@@ -2,12 +2,8 @@
 
 %% File:
 % filename, savedir
-filename = 'E:\project\20220703_plume_510\4x_510od15_closedPDMSwell_500umthick_biggestsize_g_d_unknown_DNA_unknown_localocillation.nd2';
-% savedir = 'E:\paper_active_bulging\SIMovie\';
-% savedir = 'G:\exp_script\GitProject\sample\';
-[filedir, file, ~] = fileparts(filename);
-savedir = strrep(filedir, 'project', 'project_processed');
-savedir = [savedir '\'];
+filename = 'E:\20x_cells.nd2';
+savedir = 'E:\';
 if ~exist(savedir, 'dir')
     mkdir(savedir)
 end
