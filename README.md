@@ -159,7 +159,7 @@ All the parameters related to the exported channels include in the struct `expor
 | `exportedChannelNo` | Export images of $\lambda$ Channel No. `exportedChannelNo`. Leave it empty `[]` if all are wanted. <br /> E.g., `[1 2 3]`|
 | `exportedXYNo` | Export images of $XY$ Channel No. `exportedXYNo`. Leave it empty `[]` if all are wanted. <br /> E.g., `[1 2 3]`|
 | `exportedZNo` | Export images in $Z$ Channel No. `exportedZNo`. Leave it empty `[]` if all are wanted. <br /> E.g., `[]` |
-| `shortestSideLength` | The wanted length of shortest side of the output video.  <br /> E.g., `720`|
+| `shortestSideLength` | The shortest side length of each pannel for the output video.  <br /> E.g., `720`|
 
 ### Image post-processing
 
