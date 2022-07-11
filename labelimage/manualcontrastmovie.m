@@ -21,7 +21,7 @@ for iXY = 1:size(frames, 1)
         currentChannel = 1;
         channelContrast = zeros(numel(exportedChannelNo), 2);
         for iChannel = exportedChannelNo
-            lowhightemp = adjustcontrastGUI(f, frameStack, currentChannel).outputlowhigh();
+            lowhightemp = adjustcontrastGUI(f, frameStack, iChannel).outputlowhigh();
             channelContrast(currentChannel,:) = lowhightemp;
             currentChannel = currentChannel + 1;
         end
