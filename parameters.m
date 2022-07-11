@@ -37,8 +37,7 @@ processPara.drawROI = 0; % 0: do nothing; 1: draw ROI.
 processPara.needScalebar = 1;
 processPara.needScaleText =1;
 processPara.needTimeStamp = 1;
-processPara.title = {}; % title: cell array of character vectors 
-
+processPara.title = {'Phase contrast', 'FITC'}; % title: cell array of character vectors 
 
 %% Video:
 % isCompressed, frameRate.

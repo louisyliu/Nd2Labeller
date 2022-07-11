@@ -76,7 +76,7 @@ for iZ = 1:nZStacks
                 if needCrop
                     imgProcessed = imcrop(imgProcessed, postInfo.roiRect);
                 end
-                imgCompressed(:,:,icurrent, iChannel, iXY, iZ) = imresize(imgProcessed, scale); % Resize the image
+                imgCompressed(:,:,icurrent, currentChannel, iXY, iZ) = imresize(imgProcessed, scale); % Resize the image
             end
 
             if numel(processedFrame) ~= 1
