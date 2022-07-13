@@ -47,8 +47,8 @@ frameRate = 20;
 
 %% Snapshot montage:
 % needSnapshot, nSnap
-% needSnapshot = 0;
-% nSnap = 4;
+needSnapshot = 0;
+nSnap = 4;
 
 %% Execute
 labelimage;
