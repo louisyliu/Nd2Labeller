@@ -1,4 +1,4 @@
-function imgCat = catimg(img, postInfo)
+function [imgCat, postInfo] = catimg(img, postInfo)
 
 %CATIMG concatenates the image stacks horizontally by default.
 
@@ -15,8 +15,11 @@ nDimHorizontal = size(img, dimHorizontal);
 nDimVertical = size(img, dimVertical);
 
 if nDimHorizontal < nDimVertical
+    [nDimHorizontal, nDimVertical] = deal(nDimVertical, nDimHorizontal);
     [dimHorizontal, dimVertical] = deal(dimVertical,dimHorizontal);
 end
+
+postInfo.gridImg = [nDimHorizontal nDimVertical];
 
 imgCat = [];
 

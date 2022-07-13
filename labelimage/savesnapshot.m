@@ -8,9 +8,9 @@ function savesnapshot(snapshot, postInfo, titleOfImg, savename)
 snapshot{end} = labelscale(snapshot{end}, postInfo);
 snapshot{1} = labeltitle(snapshot{1}, postInfo, titleOfImg);
 figure
-montage(snapshot, 'ThumbnailSize', []);
+montage(snapshot, 'ThumbnailSize', [], Size=[length(snapshot) 1]);
 axis off;
-saveas(gcf, [savename, '.png']);
+saveimg([savename, '.png']);
 disptitle('Successfully save the snapshot in ');
 disptitle([savename, '.png']);
 end

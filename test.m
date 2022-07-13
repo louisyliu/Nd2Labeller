@@ -17,7 +17,7 @@ imgCompressed = imgcompress(filename, postInfo, processPara.contrastMethod);
 nImg = size(imgCompressed, 3);
 
 % Concatenate image stack
-imgCat = catimg(imgCompressed, postInfo);
+[imgCat, postInfo] = catimg(imgCompressed, postInfo);
 
 % Stamp time
 if processPara.needTimeStamp && nImg > 1
