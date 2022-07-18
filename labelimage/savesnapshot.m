@@ -6,7 +6,9 @@ function savesnapshot(snapshot, postInfo, titleOfImg, savename)
 %   [savename].
 
 snapshot{end} = labelscale(snapshot{end}, postInfo);
-snapshot{1} = labeltitle(snapshot{1}, postInfo, titleOfImg);
+if ~isempty(titleOfImg)
+    snapshot{1} = labeltitle(snapshot{1}, postInfo, titleOfImg);
+end
 fullname = [savename '.jpg'];
 fig = figure('Visible','off');
 cdata = montage(snapshot, 'ThumbnailSize', [], Size=[length(snapshot) 1]);
