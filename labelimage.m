@@ -43,7 +43,7 @@ if strcmp(postInfo.duration, 'N/A') || size(imgFinal, 3) == 1
     disptitle('Successfully save the video in');
     disptitle([savename '.png']);
 else
-    videowrite(imgFinal, savename, frameRate, isCompressed);
+    im2movie(imgFinal, savename, frameRate, isCompressed);
 end
 % Snapshot labeling
 if needSnapshot

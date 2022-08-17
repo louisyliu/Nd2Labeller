@@ -1,4 +1,4 @@
-function videowrite(img, savename, framerate, isCompressed)
+function im2movie(img, savename, framerate, isCompressed)
 
 if isCompressed
     v = VideoWriter(savename, 'MPEG-4');

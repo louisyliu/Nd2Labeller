@@ -19,10 +19,16 @@ nImg = size(imgCompressed, 3);
 % Concatenate image stack
 [imgCat, postInfo] = catimg(imgCompressed, postInfo);
 
+% Set font size
+fontsize = round(30/720*max(postInfo.compressedSize)); % 30 pt for 720 px
+
 % Stamp time
 if processPara.needTimeStamp && nImg > 1
     disptitle('Stamping time')
-    imgTime = stamptime(imgCat, postInfo, startTime);
+        imgTime = stamptime(imgCat, postInfo, startTime);
+%     imgTime = stamptime1(imgCat, postInfo.period,
+%     postInfo.duration,fontsize, startTime, postInfo.timeSeq{1}); % test
+%     
 else
     imgTime = imgCat;
 end
@@ -61,7 +67,7 @@ if strcmp(postInfo.duration, 'N/A') || size(imgTime, 3) == 1
     disptitle('Successfully save the video in');
     disptitle([savename '.png']);
 else
-    videowrite(imgText, savename, frameRate, isCompressed);
+    im2movie(imgText, savename, frameRate, isCompressed);
 end
 
 % Snapshot labeling
