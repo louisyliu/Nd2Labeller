@@ -88,7 +88,7 @@ frameRate = 20; % 20 fps
 labelimage;
 ```
 
-### 2. Run `parameters.m`
+### 2. Run `demo.m`
 
 Simply click `Run` or select all followed by press `F9`.
 
