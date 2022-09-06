@@ -96,7 +96,7 @@ Simply click `Run` or select all followed by press `F9`.
 
 If `processPara.contrastMethod = 2` is selected, you need to manually adjust contrast of images.  A built-in GUI pops out (see below).
 
-![Manually adjust contrast](img/manually_adjust_contrast.png)
+![Manually adjust contrast](assets/manually_adjust_contrast.png)
 
 > You are asked to adjust contrast of several groups of images depending on how many channels are exported.  Here, it is two.  Close the window after adjusting the contrast.  Do not click `Adjust Data`.
 
@@ -104,7 +104,7 @@ If `processPara.contrastMethod = 2` is selected, you need to manually adjust con
 
 If `processPara.drawROI = 1` is selected, you can freely select the squared ROI.  A custom-programed GUI pops out (see below).
 
-![ROI selection](img/ROI.png)
+![ROI selection](assets/ROI.png)
 
 > You are asked to select ROI of only one group of images.  The other channel will follow the same ROI in this group.  
 >
@@ -114,13 +114,13 @@ If `processPara.drawROI = 1` is selected, you can freely select the squared ROI.
 
 ### 5. Have a cup of tea :coffee:
 
-![Progress bar](img/processing_bar.gif)
+![Progress bar](assets/processing_bar.gif)
 
 ### 6. Done.  Check in the `savedir`
 
 Below is the snapshot of the output video.
 
-![Snapshot](img/output_video.png)
+![Snapshot](assets/output_video.png)
 
 ## Parameters
 
