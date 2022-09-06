@@ -20,7 +20,7 @@ startTime = 0; % s
 % needScalebar, needScaleText, needTimeStamp. 
 % Empty for all.
 
-exportPara.exportedT = [1 2000]; % T from T(1) to T(2)
+exportPara.exportedT = [1 2000]; % T from T(1) to T(2); blank for all
 exportPara.exportEveryNumFrame = 2;
 
 % At most two dimensions can be selected. For example, if channelNo and

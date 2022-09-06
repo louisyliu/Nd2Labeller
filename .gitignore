@@ -3,6 +3,5 @@
 *.mex*
 *.mlappinstall
 *.mltbx
-parameters.m
 *.pptx
-demo.m
+demo_louis.m
