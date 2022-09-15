@@ -38,6 +38,8 @@ processPara.needScalebar = 1;
 processPara.needScaleText =1;
 processPara.needTimeStamp = 1;
 processPara.title = {'Phase contrast', 'FITC'}; % title: cell array of character vectors 
+processPara.timeLabel = {1, 'Light On'; 100, 'Light Off'};  
+% n x 2 cell array.  1st col: frame, 2nd col: label text.  E.g., 1-99 light on. 100-end light off
 
 %% Video:
 % isCompressed, frameRate.

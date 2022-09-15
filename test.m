@@ -41,9 +41,17 @@ else
     imgTitle = imgTime;
 end
 
+% Label time windows
+if ~isempty(processPara.timeLabel)
+    disptitle('Label time label')
+    imgTimeLabel = labeltimelabel(imgTitle, postInfo, processPara.timeLabel);
+else
+    imgTimeLabel = imgTime;
+end
+
 % Extract snapshot
 if needSnapshot
-    snapshot = imgsnap(imgTime, nSnap);
+    snapshot = imgsnap(imgTimeLabel, nSnap);
 end
 
 % Label scalebar

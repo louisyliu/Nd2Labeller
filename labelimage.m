@@ -28,6 +28,11 @@ if ~isempty(processPara.title)
     disptitle('Label title')
     imgFinal = labeltitle(imgFinal, postInfo, processPara.title);
 end
+% Label time label
+if ~isempty(processPara.timeLabel)
+    disptitle('Label time label')
+    imgFinal = labeltimelabel(imgFinal, postInfo, processPara.timeLabel);
+end
 % Label scalebar
 if processPara.needScalebar
     [imgFinal, barInfo] = labelscale(imgFinal, postInfo);
