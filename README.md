@@ -173,6 +173,8 @@ All the parameters related to the image post-processing include in the struct `p
 | `needScaleText` | Label the actual size of scale bar?  <br />  `0`: No; `1`: Yes |
 | `needTimeStamp` | Label the time stamp? <br />  `0`: No; `1`: Yes |
 | `title` | Title of each channel.  It is a cell array of character vectors.  <br /> E.g., `{'FITC', 'mCherry'}`|
+| `timeLabel` | Labels of time interval.  It is a `N x 2` cell array of character vectors.  The 1st colomn is the start frame.  The 2nd colomn is the labels. <br /> E.g., `{1, 'Light On'; 100, 'Light Off'}` means <br /> 1-99 frames labels `Light On` and 100-end frames labels `Light Off`.|
+
 
 > __Note__
 >
