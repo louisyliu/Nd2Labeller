@@ -79,6 +79,7 @@ processPara.needScalebar = 1; % label scalebar;
 processPara.needScaleText =1; % label text of scalebar; 
 processPara.needTimeStamp = 1; % label timestamp; 
 processPara.title = {'Phase contrast', 'FITC'}; % label title of each channel.
+processPara.timeLabel = {1, 'Light On'; 100, 'Light Off'};
 
 %% Video:
 isCompressed = 1; % output compressed 'MPEG-4'
