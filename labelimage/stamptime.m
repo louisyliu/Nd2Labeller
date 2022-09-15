@@ -20,7 +20,7 @@ end
 imgTime = img;
 
 position = [round(0.007*imgWidth) round(0.007*imgHeight)];
-bgcolor = mean2(img(position(1):position(1)+50, position(2):position(2)+50,1));
+bgcolor = mean2(img(position(2):position(2)+50, position(1):position(1)+50,1));
 if bgcolor > 200
     textcolor = 'black';
 else
