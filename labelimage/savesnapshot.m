@@ -11,7 +11,8 @@ if ~isempty(titleOfImg)
 end
 fullname = [savename '.jpg'];
 fig = figure('Visible','off');
-cdata = montage(snapshot, 'ThumbnailSize', [], Size=[length(snapshot) 1]);
+% cdata = montage(snapshot, 'ThumbnailSize', [], Size=[length(snapshot) 2]);
+cdata = montage(snapshot, 'ThumbnailSize', []);
 axis off
 imwrite(cdata.CData, fullname);
 close(fig);

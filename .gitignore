@@ -4,4 +4,5 @@
 *.mlappinstall
 *.mltbx
 *.pptx
-demo_louis.m
+my_script/
+test/

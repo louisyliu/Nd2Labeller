@@ -18,7 +18,7 @@ for iImg = 1:nImg
     if imgDim == 3
         writeVideo(v, img(:,:,iImg));
     elseif imgDim == 4
-        writeVideo(v, img(:,:,:,iImg));
+        writeVideo(v, mat2gray(img(:,:,:,iImg)));
     end
     %     dispbar(iImg, nImg);
 end
