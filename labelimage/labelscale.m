@@ -15,7 +15,7 @@ realBarWidth = round(realBarWidth, -floor(log10(realBarWidth)));
 barWidth = round(realBarWidth / scale);
 
 %Insert the scale bar.
-bgcolor = mean(img(end-bot-barHeight:end-bot, end-right-barWidth:end-right, 1,:));
+bgcolor = mean2(img(end-bot-barHeight:end-bot, end-right-barWidth:end-right, 1,:));
 if bgcolor > 200
     barcolor = 0;
 else
