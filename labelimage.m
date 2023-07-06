@@ -1,7 +1,7 @@
 % Label image using low memory
 disptitle('Loading Nd2 Data')
 postInfo =  nd2analysis(filename, objective, nFreqDiv, exportPara);
-postInfo.autoContrastPara = {[0 0.1]; [0 0.03]};
+% postInfo.autoContrastPara = {[0 0.1]; [0 0.03]};
 disptitle('Finish Loading')
 % Compress and contrast.
 if processPara.contrastMethod == 2
