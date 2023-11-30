@@ -117,9 +117,9 @@ else
 end
 
 % Auto contrast parameters.
-if strcmp(Dimensions,'N/A')
-    exportedChannelNo = 1;
-elseif isempty(exportedChannelNo)
+% if strcmp(Dimensions,'N/A')
+%     exportedChannelNo = 1;
+if isempty(exportedChannelNo)
     exportedChannelNo = 1:ImgInfo.nChannels;
 end
 lowhigh = autocontrastmovie(filename, exportedFrame, exportedChannelNo);
@@ -127,9 +127,11 @@ lowhigh = autocontrastmovie(filename, exportedFrame, exportedChannelNo);
 % Info of compressed images.
 postInfo.resizeScale = scale;  % Resized scale
 postInfo.scale = 6.5/objective/scale;  % um/px
-postInfo.period = ImgInfo.period;
-postInfo.fps = ImgInfo.fps;
-postInfo.duration = ImgInfo.duration;
+if ImgInfo.nImg ~= 1
+    postInfo.period = ImgInfo.period;
+    postInfo.fps = ImgInfo.fps;
+    postInfo.duration = ImgInfo.duration;
+end
 postInfo.objective = objective;
 postInfo.nChannels = ImgInfo.nChannels;
 postInfo.exportedChannelNo = exportedChannelNo;
