@@ -25,7 +25,8 @@ if processPara.needTimeStamp && nImg > 1
     imgFinal = stamptime(imgFinal, postInfo, startTime);
 end
 % Extract snapshot
-if needSnapshot
+needSnapshot = needSnapshot && size(imgFinal,3) ~=1; % no need for 1 image
+if needSnapshot 
     snapshot = imgsnap(imgFinal, nSnap);
 end
 % Label title
