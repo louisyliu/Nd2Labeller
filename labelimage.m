@@ -8,12 +8,9 @@ if processPara.contrastMethod == 2
     postInfo.manualContrastPara = manualcontrastmovie(filename, postInfo.frames, postInfo.exportedChannelNo);
 end
 if processPara.drawROI == 1
-    [postInfo.rotateAngle, postInfo.roiRect, postInfo.cropSize] = drawroiGUI(filename, postInfo, processPara.contrastMethod).getroi(); % [x y width height]
-    % postInfo.roiRect = [257-120,57-50, 2047, 2047];
-    % postInfo.cropSize = [2048, 2048];
+    [postInfo.rotateAngle, postInfo.roiPosition, postInfo.cropSize] = drawroiGUI(filename, postInfo, processPara.contrastMethod).getroi(); % [x y width height]
     postInfo = updateroiinfo(postInfo, exportPara.shortestSideLength);
 end
-
 
 imgFinal = imgcompress(filename, postInfo, processPara.contrastMethod);
 % Concatenate image stack
