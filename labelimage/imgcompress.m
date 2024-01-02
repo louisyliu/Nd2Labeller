@@ -13,7 +13,7 @@ if isfield(postInfo, 'rotateAngle') && postInfo.rotateAngle ~= 0
     needRotate = true;
 end
 
-if isfield(postInfo, 'roiRect')
+if isfield(postInfo, 'roiRect') && ~isempty(postInfo.roiRect)
     needCrop = true;
 end
 if postInfo.nChannels == 1

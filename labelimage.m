@@ -41,7 +41,7 @@ if processPara.needScalebar
     [imgFinal, barInfo] = labelscale(imgFinal, postInfo);
 end
 % Label text of scalebar
-if processPara.needScaleText %&& nImg > 1
+if processPara.needScaleText 
     imgFinal = labelscaletext(imgFinal, barInfo, postInfo);
 end
 %Convert img to .avi

@@ -3,7 +3,14 @@ function imgText = labelscaletext(img, barInfo, postInfo)
 [imgCatHeight, imgCatWidth] = size(img,[1 2]);
 [barHeight, barWidth, right, bot, barcolor] = deal(barInfo.barHeight, barInfo.barWidth, barInfo.right, barInfo.bot, barInfo.barcolor);
 imgText = zeros(size(img), 'like', img);
-text = [num2str(barInfo.scalebarUm) ' μm'];
+if barInfo.scalebarUm >= 1000
+    umOrMm = ' mm';
+    labelScaleValue = barInfo.scalebarUm/1000;
+else
+    labelScaleValue = barInfo.scalebarUm;
+    umOrMm = ' μm';
+end
+text = [num2str(labelScaleValue) umOrMm];
 position = [imgCatWidth-right-barWidth/2 imgCatHeight-bot-1.5*barHeight];
 barcolor = repmat(barcolor, 1, 3);
 fontsize = round(28/720*max(postInfo.compressedSize));

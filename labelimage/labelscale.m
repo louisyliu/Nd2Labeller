@@ -11,7 +11,11 @@ bot = round(0.046 * imgHeight); % dist of scalebar to bot side
 barHeight = round(0.014 * imgHeight);
 barWidth = round(0.18 * imgWidth);
 realBarWidth = barWidth * scale;
-realBarWidth = round(realBarWidth, -floor(log10(realBarWidth)));
+roundIdx = 10^(ceil(log10(realBarWidth)))/2;
+realBarWidth = round(realBarWidth/roundIdx)*roundIdx;
+if realBarWidth == 0
+    realBarWidth = roundIdx/5;
+end
 barWidth = round(realBarWidth / scale);
 
 %Insert the scale bar.
