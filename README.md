@@ -48,7 +48,7 @@ To convert `.nd2` file into labelled `.mp4` video in MATLAB.
 >
 > Follow the steps below to have a try.
 
-### 1. Adjust parameters in `parameters.m`
+### 1. Adjust parameters in `demo.m`
 
 ```matlab
 %% File:
@@ -80,10 +80,16 @@ processPara.needScaleText =1; % label text of scalebar;
 processPara.needTimeStamp = 1; % label timestamp; 
 processPara.title = {'Phase contrast', 'FITC'}; % label title of each channel.
 processPara.timeLabel = {1, 'Light On'; 100, 'Light Off'};
+% n x 2 cell array.  1st col: frame, 2nd col: label text.  E.g., 1-99 light on. 100-end light off
 
 %% Video:
 isCompressed = 1; % output compressed 'MPEG-4'
 frameRate = 20; % 20 fps
+
+%% Snapshot montage:
+% needSnapshot, nSnap
+needSnapshot = 0;
+nSnap = 4;
 
 %% Execute
 labelimage;
