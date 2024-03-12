@@ -19,12 +19,29 @@ end
 barWidth = round(realBarWidth / scale);
 
 %Insert the scale bar.
-bgcolor = mean2(img(end-bot-barHeight:end-bot, end-right-barWidth:end-right, 1,:));
-if bgcolor > 200
-    barcolor = 0;
-else
-    barcolor = 255;
+bg = img(end-bot-barHeight:end-bot, end-right-barWidth:end-right, 1,:);
+bgcolor = mean2(bg);
+
+% if bgcolor > 200 
+%     barcolor = 0;
+% else
+%     barcolor = 255;
+% end
+black = false;
+white = false;
+if all(bg(:)~= 0)
+    black = true;
 end
+if all(bg(:)~=255)
+    white = true;
+end
+
+if bgcolor < 200 && white
+    barcolor = 255;
+elseif black
+    barcolor = 0;
+end
+
 imgScalebar = img;
 imgScalebar(end-bot-barHeight:end-bot, end-right-barWidth:end-right, :,:) = barcolor;
 
