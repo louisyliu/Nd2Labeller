@@ -11,11 +11,24 @@ bot = round(0.046 * imgHeight); % dist of scalebar to bot side
 barHeight = round(0.014 * imgHeight);
 barWidth = round(0.18 * imgWidth);
 realBarWidth = barWidth * scale;
-roundIdx = 10^(ceil(log10(realBarWidth)))/2;
-realBarWidth = round(realBarWidth/roundIdx)*roundIdx;
-if realBarWidth == 0
-    realBarWidth = roundIdx/5;
-end
+magnitude = floor(log10(realBarWidth));
+firstDigit = floor(realBarWidth/10^(magnitude));
+
+ % Determine the closest number starting with 1, 2, or 5
+    if firstDigit <= 1
+        realBarWidth = 10^magnitude;
+    elseif firstDigit <= 2
+        realBarWidth = 2 * 10^magnitude;
+    elseif firstDigit <= 5
+        realBarWidth = 5 * 10^magnitude;
+    else
+        realBarWidth = 10^(magnitude + 1);
+    end
+
+% realBarWidth = round(realBarWidth/roundIdx)*roundIdx;
+% if realBarWidth == 0
+%     realBarWidth = roundIdx/5;
+% end
 barWidth = round(realBarWidth / scale);
 
 %Insert the scale bar.
