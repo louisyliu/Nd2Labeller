@@ -4,8 +4,9 @@ if isCompressed
     v = VideoWriter(savename, 'MPEG-4');
     v.Quality = 100;
 else
-    v = VideoWriter(savename, 'Grayscale AVI');
-% v = VideoWriter(savename, 'Uncompressed AVI');
+    % v = VideoWriter(savename, 'Grayscale AVI');
+v = VideoWriter(savename, 'Uncompressed AVI');
+% v = VideoWriter(savename);
 end
 
 v.FrameRate = framerate;
@@ -18,7 +19,7 @@ for iImg = 1:nImg
     if imgDim == 3
         writeVideo(v, img(:,:,iImg));
     elseif imgDim == 4
-        writeVideo(v, mat2gray(img(:,:,:,iImg)));
+        writeVideo(v, im2double(img(:,:,:,iImg)));
     end
     %     dispbar(iImg, nImg);
 end
