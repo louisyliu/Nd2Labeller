@@ -45,7 +45,7 @@ processPara.timeLabel = {1, 'Light On'; 100, 'Light Off'};
 % isCompressed, frameRate.
 
 isCompressed = 1; % 1 for 'MPEG-4' and 0 for 'Grayscale AVI'
-frameRate = 20;
+frameRate = 20;  % below 40 fps or wasting resource
 
 %% Snapshot montage:
 % needSnapshot, nSnap
