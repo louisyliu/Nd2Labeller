@@ -1,7 +1,7 @@
 % Label image using low memory
 disptitle('Loading Nd2 Data')
 postInfo =  nd2analysis(filename, objective, nFreqDiv, exportPara);
-% postInfo.autoContrastPara = {[0 0.1]; [0 0.03]};
+% postInfo.autoContrastPara = {[0.01 0.04]};  manual contrast
 disptitle('Finish Loading')
 % Compress and contrast.
 if processPara.contrastMethod == 2
@@ -46,9 +46,9 @@ if processPara.needScaleText
 end
 %Convert img to .avi
 if processPara.needScalebar
-    savename = [savedir postInfo.name(1:end-4) '_scalebar' num2str(barInfo.scalebarUm) 'um'];
+    savename = [savedir postInfo.name(1:end-4) '_scalebar' num2str(barInfo.scalebarUm) 'um_' num2str(exportPara.exportedT(1)) 'to' num2str(exportPara.exportedT(end))];
 else
-    savename = [savedir postInfo.name(1:end-4) '_noscalebar'];
+    savename = [savedir postInfo.name(1:end-4) '_noscalebar_' num2str(exportPara.exportedT(1)) 'to' num2str(exportPara.exportedT(end))];
 end
 % save video
 if size(imgFinal, 3) == 1 || strcmp(postInfo.duration, 'N/A')
