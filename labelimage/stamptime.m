@@ -62,9 +62,11 @@ for iImg = 1:nImg
         remainer = mod(timeStamp,3600);
         minute = floor(remainer/60);
         sec = floor(mod(remainer,60));
-        if mod(round(period), 3600) == 0
+
+        % period is unit of second
+        if period > 1 && mod(round(period), 3600) == 0 % period > 1 in case of fast time lapse for 1h
             textStr = sprintf('%02d h',hour);
-        elseif mod(round(period), 60) == 0
+        elseif period > 1 && mod(round(period), 60) == 0 
             textStr = sprintf('%02d:%02d (h:m)',hour, minute);
         else
             textStr = sprintf('%02d:%02d:%02d (h:m:s)',hour, minute, sec);
