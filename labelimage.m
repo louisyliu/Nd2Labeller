@@ -46,10 +46,14 @@ if processPara.needScaleText
 end
 %Convert img to .avi
 if processPara.needScalebar
-    savename = [savedir postInfo.name(1:end-4) '_scalebar' num2str(barInfo.scalebarUm) 'um_' num2str(exportPara.exportedT(1)) 'to' num2str(exportPara.exportedT(end))];
+    savename = [savedir postInfo.name(1:end-4) '_scalebar' num2str(barInfo.scalebarUm) 'um'];
 else
-    savename = [savedir postInfo.name(1:end-4) '_noscalebar_' num2str(exportPara.exportedT(1)) 'to' num2str(exportPara.exportedT(end))];
+    savename = [savedir postInfo.name(1:end-4) '_noscalebar'];
 end
+if ~isempty(exportPara.exportedT)
+    savename = [savename '_' num2str(exportPara.exportedT(1)) 'to' num2str(exportPara.exportedT(end))]
+end
+
 % save video
 if size(imgFinal, 3) == 1 || strcmp(postInfo.duration, 'N/A')
     imwrite(imgFinal, [savename '.png']);
