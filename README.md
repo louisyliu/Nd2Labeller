@@ -6,7 +6,7 @@
             |_| \_| \____||_____| |__ __|\____|_ __/ \____|_|_|\____|_|
 ```
 
-# Nd2Labeller: Effortlessly Convert and Label Your `.nd2` Files!
+# Nd2Labeller: Simply Convert and Label Your `.nd2` Files!
 
 ![license](https://img.shields.io/badge/License-MIT-green)
 
