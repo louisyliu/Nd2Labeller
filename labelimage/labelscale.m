@@ -2,7 +2,7 @@ function [imgScalebar, barInfo] = labelscale(img, postInfo)
 
 % disptitle('Labeling the scale bar');
 scale = postInfo.scale;
-[imgHeight, imgWidth] = deal(postInfo.compressedSize(1), postInfo.compressedSize(2));
+[imgHeight, imgWidth] = size(img, 1:2);
 
 %Evaluate the position and width of a scale bar.
 % right = round(0.028 * imgWidth); % dist of scalebar to right side

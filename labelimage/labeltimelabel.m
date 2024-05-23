@@ -1,4 +1,4 @@
-function imgTimeLabel = labeltimelabel(img, postInfo, timeLabel)
+function imgTimeLabel = labeltimelabel(img, timeLabel)
 %LABELTITLELABEL labels the image sequence with time label.
 %   labeltimelabel(img, postInfo, timeLabel) labels the image sequence
 %   [img] combined with multiple channels with the corresponding title in
@@ -13,7 +13,7 @@ imgTimeLabel = img;
 
 [imgHeight, imgWidth] = size(img,[1 2]);
 
-fontsize = round(30/720*max(postInfo.compressedSize)); % default 26 pt for 720 px
+fontsize = round(30/720*max(size(img, 1:2))); % default 26 pt for 720 px
 nLabels = min(nImg, size(timeLabel,1));
 
 position = [round(0.007*imgWidth) imgHeight-round(0.007*imgHeight)];

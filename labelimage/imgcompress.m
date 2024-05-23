@@ -1,9 +1,9 @@
 function imgCompressed = imgcompress(filename, postInfo, contrastMethod)
 % Contrast method :
-% 0: no contrast; 1: auto contrast; 2: manual contrast
+% 0: no contrast; 1: auto contrast; 2: manual contrast; 3: defined
 
 scale = postInfo.resizeScale;
-imgSize = postInfo.compressedSize;
+imgSize = postInfo.finalSize;
 frames = postInfo.frames;
 nZStacks = size(frames, 2);
 nXYStacks = size(frames, 1);
@@ -46,6 +46,8 @@ switch contrastMethod
     case 1
         lowhigh = postInfo.autoContrastPara;
     case 2
+        lowhigh = postInfo.manualContrastPara;
+    case 3
         lowhigh = postInfo.manualContrastPara;
     otherwise
         error('Wrong contrastMethod.');

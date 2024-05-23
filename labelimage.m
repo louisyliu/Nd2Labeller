@@ -51,7 +51,7 @@ else
     savename = [savedir postInfo.name(1:end-4) '_noscalebar'];
 end
 if ~isempty(exportPara.exportedT)
-    savename = [savename '_' num2str(exportPara.exportedT(1)) 'to' num2str(exportPara.exportedT(end))]
+    savename = [savename '_' num2str(exportPara.exportedT(1)) 'to' num2str(exportPara.exportedT(end))];
 end
 
 % save video

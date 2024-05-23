@@ -1,10 +1,5 @@
-function imgTime = stamptime(img, postInfo, varargin)
+function imgTime = stamptime(img, postInfo, startTime)
 
-if nargin == 2
-    startTime = 0; % startTime: s.
-elseif nargin == 3
-    startTime = varargin{1};
-end
 
 imgSize = size(img);
 imgHeight = imgSize(1);
@@ -41,7 +36,7 @@ else
 end
 singleNo = floor(log10(duration))+1;
 
-fontsize = round(30/720*max(postInfo.compressedSize)); % default 26 pt for 720 px
+fontsize = round(30/720*max(size(img, 1:2))); % default 26 pt for 720 px
 
 for iImg = 1:nImg
     
