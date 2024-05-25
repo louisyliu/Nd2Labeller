@@ -1,4 +1,4 @@
-function imgTime = stamptime(img, postInfo, startTime)
+function imgTime = stamptime(img, postInfo, startTime, fontsize)
 
 
 imgSize = size(img);
@@ -36,7 +36,7 @@ else
 end
 singleNo = floor(log10(duration))+1;
 
-fontsize = round(30/720*max(size(img, 1:2))); % default 26 pt for 720 px
+% fontsize = round(30/720*min(size(img, 1:2))); % default 26 pt for 720 px
 
 for iImg = 1:nImg
     

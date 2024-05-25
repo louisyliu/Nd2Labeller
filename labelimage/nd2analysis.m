@@ -86,18 +86,17 @@ end
 lowhigh = autocontrastmovie(filename, exportedFrame, exportedChannelNo);
 
 % Populate postInfo structure
-postInfo = struct( ...
-    'objective', objective, ...
-    'nChannels', ImgInfo.nChannels, ...
-    'exportedChannelNo', exportedChannelNo, ...
-    'nTime', minFrame, ...
-    'timeSeq', timeSeq, ...
-    'frames', exportedFrame, ...
-    'autoContrastPara', lowhigh, ...
-    'name', ImgInfo.name, ...
-    'dimSize', dimSize, ...
-    'originalSize', [ImgInfo.height, ImgInfo.width], ...
-    'finalSize', [ImgInfo.height, ImgInfo.width]);
+postInfo.objective = objective;
+postInfo.nChannels = ImgInfo.nChannels;
+postInfo.exportedChannelNo = exportedChannelNo;
+postInfo.nTime = minFrame;
+postInfo.timeSeq = timeSeq;
+postInfo.frames = exportedFrame;
+postInfo.autoContrastPara = lowhigh;
+postInfo.name = ImgInfo.name;
+postInfo.dimSize = dimSize;
+postInfo.originalSize = [ImgInfo.height, ImgInfo.width];
+postInfo.finalSize = [ImgInfo.height, ImgInfo.width];
 
 if ImgInfo.nImg ~= 1
     postInfo.period = ImgInfo.period;
@@ -114,6 +113,7 @@ function [dimSize, exportedFreqNo, exportedT, exportedXYNo, exportedZNo, exporte
 dimSize = zeros(4,1);
 type = {Dimensions.type};
 count = [Dimensions.count];
+exportInterval = [];
 
 if nFreqDiv > 1
     if isempty(exportedFreqNo)

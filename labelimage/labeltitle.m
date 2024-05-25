@@ -1,4 +1,4 @@
-function imgTitle = labeltitle(img, postInfo, titles)
+function imgTitle = labeltitle(img, postInfo, titles, fontsize)
 %LABELTITLE labels the image sequence with titles.
 %   labeltitle(img, postInfo, title) labels the image sequence [img] combined
 %   with multiple channels with the corresponding title in [titles],
@@ -13,7 +13,7 @@ imgTitle = img;
 
 
 
-fontsize = round(30/720*max(size(img,1:2))); % default 26 pt for 720 px
+% fontsize = round(30/720*max(size(img,1:2))); % default 26 pt for 720 px
 nTitle = min(length(postInfo.frames)*numel(postInfo.exportedChannelNo), length(titles));
 if length(titles) > nTitle 
     titles = titles(1:nTitle);

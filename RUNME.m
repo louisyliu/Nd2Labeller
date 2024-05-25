@@ -1,7 +1,7 @@
 % Parameters for converting ND2 to video with scalebar and timestamp.
 
 %% File
-filename = 'C:\Users\louis\Documents\Experimental data in wulab\Carbopol\20240510_327_carbopol_4mm_500umpdms\4x_327_od15_07carbopol_500um_4mmpdms_channel_splitted.nd2';
+filename = 'B:\working.nd2';
 filepath = fileparts(filename);
 savedir = [filepath '\Video\'];
 if ~exist(savedir, 'dir'), mkdir(savedir); end
@@ -23,7 +23,7 @@ exportPara.shortestSideLength = 720;
 %% Image Processing Settings
 processPara.contrastMethod = 1; % 0: none; 1: auto; 2: manual; 3: defined
 processPara.contratPara = {[]}; % nx2 array
-processPara.drawROI = 0; % 0: no; 1: yes.
+processPara.drawROI = 1; % 0: no; 1: yes.
 processPara.needScalebar = 1;
 processPara.needScaleText =1;
 processPara.needTimeStamp = 1;

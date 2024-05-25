@@ -1,13 +1,11 @@
 % parameters
 
-%%%%(TODO: font size adjustment)
-
 disptitle('Loading Nd2 Data')
 postInfo =  nd2analysis(filename, objective, nFreqDiv, exportPara);
-disptitle('Finish Loading')
 
 % Adjust contrast
 if processPara.contrastMethod == 2 % manual contrast
+    disptitle('Loading manual contrast GUI')
     postInfo.manualContrastPara = manualcontrastmovie(filename, postInfo.frames, postInfo.exportedChannelNo);
 elseif processPara.contrastMethod == 3 && ~isempty(processPara.contratPara)
     postInfo.manualContrastPara = processPara.contratPara; % defined contrast
@@ -15,6 +13,7 @@ end
 
 % ROI
 if processPara.drawROI == 1
+    disptitle('Loading ROI selecting GUI')
     [postInfo.rotateAngle, postInfo.roiRect, postInfo.finalSize] = drawroiGUI(filename, postInfo, processPara.contrastMethod).getroi(); % [x y width height]
 end
 
@@ -27,7 +26,8 @@ postInfo = updateroiinfo(postInfo, exportPara.shortestSideLength);
 imgCompressed = imgcompress(filename, postInfo, processPara.contrastMethod);
 
 % Concatenate image stack
-imgCat = catimg_test(imgCompressed, postInfo);
+disptitle('Concatenating the image sequence');
+imgCat = catimg2(imgCompressed, postInfo);
 
 % Set font size 
 fontsize = round(30/720*max(size(imgCat, 1:2))); % 30 pt for 720 px
@@ -45,7 +45,7 @@ end
 
 % Label title
 if ~isempty(processPara.title)
-    disptitle('Label title')
+    disptitle('Labeling title')
     imgTitle = labeltitle(imgTime, postInfo, processPara.title);
 else
     imgTitle = imgTime;
@@ -53,7 +53,7 @@ end
 
 % Label time windows
 if ~isempty(processPara.timeLabel)
-    disptitle('Label time label')
+    disptitle('Labeling time label')
     imgTimeLabel = labeltimelabel(imgTitle, processPara.timeLabel);
 else
     imgTimeLabel = imgTime;
@@ -72,7 +72,7 @@ else
 end
 
 % Label text of scalebar
-if processPara.needScaleText && nTime > 1
+if processPara.needScaleText && postInfo.nTime > 1
     imgText = labelscaletext(imgScalebar, barInfo);
 else
     imgText = imgScalebar;

@@ -25,18 +25,6 @@ end
 nChannelStacks = numel(postInfo.exportedChannelNo);
 nTime = postInfo.nTime;
 
-% if isfield(postInfo, 'roiRect')
-%     imgSize = round(postInfo.roiRect([4 3]));
-%     needCrop = true;
-% 
-%     if min(imgSize) > shortestSide
-%         scale = shortestSide/min(imgSize);
-%         imgSize = ceil(imgSize*scale);
-%     else
-%         scale = 1;
-%     end
-% end
-
 %Initialization
 imgCompressed = zeros([imgSize nTime nChannelStacks nXYStacks nZStacks], 'uint8');
 
@@ -65,7 +53,7 @@ for iZ = 1:nZStacks
         for iImg = processedFrame
             icurrent = icurrent + 1;
             img = f.getimage(iImg);
-%             img = imresize(img, scale); 
+
             % Contrast stretch image
             currentChannel = 0;
 
