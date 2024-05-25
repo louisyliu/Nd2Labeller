@@ -7,9 +7,9 @@ savedir = [filepath '\Video\'];
 if ~exist(savedir, 'dir'), mkdir(savedir); end
 
 %% Image Acquisition
-objective = 4;
-nFreqDiv = 2; 
-startTime = 0; % seconds
+acqPara.objective = 4;
+acqPara.nFreqDiv = 2; 
+acqPara.startTime = 0; % seconds
 
 %% Exported Image
 exportPara.exportedT = []; % [startFrame endFrame], [] for all
@@ -31,13 +31,13 @@ processPara.title = {'Phase contrast', 'FITC'};
 processPara.timeLabel = {1, 'Light On'; 100, 'Light Off'}; % frame
 
 %% Video
-isCompressed = 1; % 1: 'MPEG-4'; 0: 'Grayscale AVI'
-frameRate = 20;  % Recommend setting below 40 fps to optimize resource usage. 
+videoPara.isCompressed = 1; % 1: 'MPEG-4'; 0: 'Grayscale AVI'
+videoPara.frameRate = 20;  % Recommend setting below 40 fps to optimize resource usage. 
 
 %% Snapshot
-needSnapshot = 0;
-nSnap = 4;
+snapPara.needSnapshot = 0;
+snapPara.nSnap = 4;
 
 %% Execute Conversion
-% labelimage;
-test_new_framework;
+labelimage(filename, savedir, acqPara, exportPara, processPara, videoPara, snapPara);
+% test_new_framework;

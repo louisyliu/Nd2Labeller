@@ -1,6 +1,8 @@
+function labelimage(filename, savedir, acqPara, exportPara, processPara, videoPara, snapPara)
+
 % Label image using low memory
 disptitle('Loading Nd2 Data')
-postInfo =  nd2analysis(filename, objective, nFreqDiv, exportPara);
+postInfo =  nd2analysis(filename, acqPara.objective, acqPara.nFreqDiv, exportPara);
 disptitle('Finish Loading')
 
 % Adjust contrast
@@ -18,7 +20,7 @@ if processPara.drawROI == 1
 end
 
 % Determine grid size
-postInfo.gridImg = getgridsize(nFreqDiv, postInfo.dimSize, postInfo.finalSize); 
+postInfo.gridImg = getgridsize(acqPara.nFreqDiv, postInfo.dimSize, postInfo.finalSize);
 postInfo = updateroiinfo(postInfo, exportPara.shortestSideLength);
 
 % Compress image stack
@@ -34,7 +36,7 @@ fontsize = round(30/720*min(size(imgFinal, 1:2))); % default 26 pt for 720 px
 % Stamp time
 if processPara.needTimeStamp && postInfo.nTime > 1
     disptitle('Stamping time')
-    imgFinal = stamptime(imgFinal, postInfo, startTime, fontsize);
+    imgFinal = stamptime(imgFinal, postInfo, acqPara.startTime, fontsize);
 end
 
 % Label title
@@ -50,8 +52,8 @@ if ~isempty(processPara.timeLabel)
 end
 
 % Extract snapshot
-if needSnapshot && postInfo.nTime > 1
-    snapshot = imgsnap(imgFinal, nSnap);
+if snapPara.needSnapshot && postInfo.nTime > 1
+    snapshot = imgsnap(imgFinal, snapPara.nSnap);
 end
 
 % Label scalebar
@@ -80,12 +82,13 @@ if size(imgFinal, 3) == 1 || strcmp(postInfo.duration, 'N/A')
     disptitle('Successfully save the image in');
     disptitle([savename '.png']);
 else
-    im2movie(imgFinal, savename, frameRate, isCompressed);
+    im2movie(imgFinal, savename, videoPara.frameRate, videoPara.isCompressed);
 end
 
 % Snapshot labeling
-if needSnapshot
+if snapPara.needSnapshot
     savesnapshot(snapshot, postInfo, processPara.title, savename);
 end
 
 disptitle('Finished!')
+end
