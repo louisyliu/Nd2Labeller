@@ -21,7 +21,7 @@ end
 % Determine stack dimensions
 [dimSize, exportedFreqNo, exportedT, exportedXYNo, exportedZNo, exportedChannelNo, exportInterval] = ...
     getstackdim(nFreqDiv, exportedFreqNo, exportedT, exportedChannelNo, exportedXYNo, exportedZNo, ...
-    exportEveryNumFrame, Dimensions, nChannels);
+    exportEveryNumFrame, Dimensions, nChannels, ImgInfo);
 
 % Check dimension compatibility
 if nFreqDiv > 1 && any(dimSize(2:end) > 1)
@@ -60,7 +60,12 @@ else % Image stack
         exportedFrame = cell(numel(exportedXYNo), numel(exportedZNo));
         for iXY = 1:numel(exportedXYNo)
             for iZ = 1:numel(exportedZNo)
-                exportedFrame{iXY, iZ} = coordconvert(Dimensions, 'XY', exportedXYNo(iXY), 'Z', exportedZNo(iZ), 'T', exportedT(1):exportEveryNumFrame:exportedT(2));
+                if exportedT(1) == exportedT(end)
+                    exportedFrame{iXY, iZ} = coordconvert(Dimensions, 'XY', exportedXYNo(iXY), 'Z', exportedZNo(iZ), 'T', exportedT(1));
+
+                else
+                    exportedFrame{iXY, iZ} = coordconvert(Dimensions, 'XY', exportedXYNo(iXY), 'Z', exportedZNo(iZ), 'T', exportedT(1):exportEveryNumFrame:exportedT(2));
+                end
                 exportedFrame{iXY, iZ} = exportedFrame{iXY, iZ}(exportedFrame{iXY, iZ} <= nImg);
             end
         end
@@ -108,7 +113,7 @@ end
 % Helper function to get stack dimensions
 function [dimSize, exportedFreqNo, exportedT, exportedXYNo, exportedZNo, exportedChannelNo, exportInterval] = ...
     getstackdim(nFreqDiv, exportedFreqNo, exportedT, exportedChannelNo, exportedXYNo, exportedZNo, ...
-    exportEveryNumFrame, Dimensions, nChannels)
+    exportEveryNumFrame, Dimensions, nChannels, ImgInfo)
 
 dimSize = zeros(4,1);
 type = {Dimensions.type};
@@ -153,5 +158,5 @@ if nChannels > 1
 else
     exportedChannelNo = 1;
 end
-dimSize(4) = length(exportedZNo);
+dimSize(4) = length(exportedChannelNo);
 end

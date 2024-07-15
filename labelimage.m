@@ -31,7 +31,7 @@ disptitle('Concatenating the image sequence');
 imgFinal = catimg(imgFinal, postInfo);
 
 % Set font size
-fontsize = round(30/720*min(size(imgFinal, 1:2))); % default 26 pt for 720 px
+fontsize = round(30/720*mean(size(imgFinal, 1:2))); % default 26 pt for 720 px
 
 % Stamp time
 if processPara.needTimeStamp && postInfo.nTime > 1
